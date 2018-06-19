@@ -1,0 +1,32 @@
+﻿1.语法
+LEFT JOIN 关键字会从左表 (Persons) 那里返回所有的行，即使在右表 (Orders) 中没有匹配的行。
+	eg.
+	"Persons" 表：
+		Id_P 	LastName 	FirstName 	Address 		City
+		1 		Adams 		John 		Oxford Street 	London
+		2 		Bush 		George 		Fifth Avenue 	New York
+		3 		Carter 		Thomas 		Changan Street 	Beijing
+	"Orders" 表：
+		Id_O 	OrderNo 	Id_P
+		1 		77895 		3
+		2 		44678 		3
+		3 		22456 		1
+		4 		24562 		1
+		5 		34764 		65
+	SELECT Persons.LastName, Persons.FirstName, Orders.OrderNo FROM Persons	LEFT JOIN Orders ON Persons.Id_P=Orders.Id_P ORDER BY Persons.LastName
+	结果集：
+		LastName 	FirstName 	OrderNo
+		Adams 		John 		22456
+		Adams 		John 		24562
+		Carter 		Thomas 		77895
+		Carter 		Thomas 		44678
+		Bush 		George 	 
+		
+2.当右表有限定条件时，右表必须要有匹配行
+	eg.数据表同上
+		SELECT Persons.LastName, Persons.FirstName, Orders.OrderNo 
+		FROM Persons LEFT JOIN Orders ON Persons.Id_P=Orders.Id_P 
+		where Orders.Id_O>3 ORDER BY Persons.LastName
+	Result:
+		LastName 	FirstName 	OrderNo
+		Adams 		John 		24562

@@ -1,0 +1,23 @@
+
+1. 整合spring boot 
+	①.在spring boot的配置文件中配置如下
+		spring:
+			datasource:
+				driver-class-name: com.mysql.jdbc.Driver
+				url: jdbc:mysql://localhost:3306/DBName
+				username: 
+				password: 
+	②.在spring boot的启动类
+		加上 @MapperScan("Mapper包路径")注解，标识映射类
+		
+2. 支持SQL查询结构映射为pojo类(无需setter方法，可能时通过反射机制的暴力访问赋值(忽略访问修饰符))，
+	需要POJO类的属性名和查询返回的字段名一致(也可去设置使用驼峰命名法)。
+	@Select("select user_id userId,telephone,email,username from tbl_vw_user where username=#{userName}")
+    ViewUser getUser(@Param("userName") String userName);
+	
+3. 查询返回多个字段(不映射为实体类)，使用Map接收返回数据
+	@Select("select telephone,email from tbl_vw_user where username=#{userName}")
+    Map getInfo(@Param("userName") String userName);
+	
+4. 
+	

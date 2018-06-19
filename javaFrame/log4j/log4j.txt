@@ -1,0 +1,80 @@
+导入jar包log4j.jar
+
+log4j.properties文件
+	### 配置rootLogger 
+	### log4j.rootLogger = [level],appenderName1,appenderName2,... 
+	### level, log4j建议使用四个级别,其优先级:ERROR,WARN,INFO,DEBUG. DEBUG级可以输出这四个级别的所有信息 
+	### appenderName, 日志输出目的地, mingzi, 可配置多个 
+	log4j.rootLogger = debug,stdout,D,E
+	
+	### 配置日志输出目的地appender 
+	### 配置基本设置 
+	### log4j.appender.'appenderName' = rg.apache.log4j.{ConsoleAppender(控制台),FileAppender(文件),DailyRollingFileAppender(每天产生一个日志文件),
+	### 	RollingFileAppender(当文件满了后产生一个新的文件),WriterAppender(将日志文件以流的格式发送到指定的任意地方)} 
+	### 
+	### 配置日志的格式布局 
+	### log4j.appender.'appenderName'.layout = org.apache.log4j.{HTMLLayout(以HTML格式布局),PatternLayout(灵活指定布局),
+	### 	SimpleLayout(包含日志信息级别和信息字符串),TTCCLayout(包含日志产生的时间、线程、类别等等信息)} 
+	### log4j打印参数
+	### 	%p 输出优先级,  ERROR,WARN,INFO,DEBUG....
+	### 	%r 输出查询执行到此处的时间(毫秒)
+	### 	%c 输出所属的类目，通常是该类的
+	### 	%t 输出产生日志事件的线程名
+	### 	%n 输出一个回车换行
+	### 	%d 输出日志时间点的时间或日期, 默认格式为{yyyy-MM-dd  HH:mm:ss,SSS}，也可在其后指定格式
+	### 	%l 输出日志事件的发生位置, 包括类名、发生的线程和在代码中的行数
+	### 	%m 输出日志字符串
+	### 输出信息到控制台 
+	log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+	log4j.appender.stdout.Target = System.out
+	log4j.appender.stdout.layout = org.apache.log4j.PatternLayout
+	log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d{yyyy-MM-dd  HH:mm:ss , SSS} method:%l%n%m%n
+	
+	### 输出DEBUG级别以上的日志到./log/Log.log 
+	log4j.appender.D = org.apache.log4j.DailyRollingFileAppender
+	log4j.appender.D.File = ./log/Log.log
+	### true表示消息增加到指定文件中，false则将消息覆盖指定的文件内容，默认值是true
+	log4j.appender.D.Append = true
+	### 指定日志信息的最低输出级别，默认为DEBUG。
+	log4j.appender.D.Threshold = DEBUG
+	log4j.appender.D.layout = org.apache.log4j.PatternLayout
+	log4j.appender.D.layout.ConversionPattern = %-d{yyyy-MM-dd  HH:mm:ss} [%t:%r] - [%-5p]   %m%n
+	
+	### 输出ERROR级别以上的日志到./log/Error.log 
+	log4j.appender.E = org.apache.log4j.DailyRollingFileAppender
+	log4j.appender.E.File = ./log/Error.log
+	log4j.appender.E.Append = true
+	log4j.appender.E.Threshold = ERROR
+	log4j.appender.E.layout = org.apache.log4j.PatternLayout
+	log4j.appender.E.layout.ConversionPattern = %-d{yyyy-MM-dd  HH:mm:ss} [%t:%r] - [%p]   %m%n
+	
+在代码中使用log4j
+	org.apache.log4j.Logger log = Logger.getLogger(Class);//Class一般为当前类的class
+	log.debug("this is debug");
+	log.info("this is info");
+	log.error("this is error");
+	log.warn("this is warn");
+	
+	
+	
+eg.
+log4j.rootLogger = debug,stdout,D,E
+
+log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target = System.out
+log4j.appender.stdout.layout = org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern = [%-5p] %d{yyyy-MM-dd  HH:mm:ss , SSS} method:%l%n%m%n
+
+log4j.appender.D = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.D.File = ./log/Log.log
+log4j.appender.D.Append = true
+log4j.appender.D.Threshold = DEBUG
+log4j.appender.D.layout = org.apache.log4j.PatternLayout
+log4j.appender.D.layout.ConversionPattern = %-d{yyyy-MM-dd  HH:mm:ss} [%t:%r] - [%-5p]   %m%n
+
+log4j.appender.E = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.E.File = ./log/Error.log
+log4j.appender.E.Append = true
+log4j.appender.E.Threshold = ERROR
+log4j.appender.E.layout = org.apache.log4j.PatternLayout
+log4j.appender.E.layout.ConversionPattern = %-d{yyyy-MM-dd  HH:mm:ss} [%t:%r] - [%p]   %m%n

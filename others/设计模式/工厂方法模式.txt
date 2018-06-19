@@ -1,0 +1,69 @@
+
+1.工厂模式就是将对象的实例化过程交给一个工厂类去实现，让使用者(客户端)无需关注于具体的实例化过程。
+
+2.工厂方法模式适用于只生产一个产品类的情况，即只生产颜色，根据你的需要生产red、black、blue等
+
+3.语法
+public class Test {
+	public static void main(String[] args) throws Exception {
+		Factory factory = new ColorFactory();
+		Color red = factory.gainColor(Red.class);
+		red.draw();
+		Color black = factory.gainColor(Black.class);
+		black.draw();
+		Color blue = factory.gainColor(Blue.class);
+		blue.draw();
+		/*
+		this is red.
+		this is black.
+		this is blue.
+		 */
+	}
+}
+
+interface Color {
+	void draw();
+}
+
+class Red implements Color {
+	@Override
+	public void draw() {
+		System.out.println("this is red.");
+	}
+}
+
+class Black implements Color {
+	@Override
+	public void draw() {
+		System.out.println("this is black.");
+	}
+}
+
+class Blue implements Color {
+	@Override
+	public void draw() {
+		System.out.println("this is blue.");
+	}
+}
+
+interface Factory {
+	<T> T gainColor(Class<? extends Color> clazz);
+}
+
+class ColorFactory implements Factory {
+	
+	/**
+	 * 通过反射机制来实现
+	 * @param clazz
+	 * @return
+	 */
+	public <T> T gainColor(Class<? extends Color> clazz) {
+		T obj = null;
+		try {
+			obj = (T) Class.forName(clazz.getName()).newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return obj;
+	}
+}

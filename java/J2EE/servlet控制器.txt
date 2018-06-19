@@ -1,0 +1,34 @@
+
+1. servlet是J2EE的核心对象。
+
+2. 语法：
+web.xml
+  <servlet>
+    <servlet-name>InitServlet</servlet-name>
+    <servlet-class>com.test.init.InitServlet</servlet-class>
+    <!-- 默认值为0，当为0时在第一次调用该Servlet时才初始化对象，不为0时会在容器启动时按照值得顺序初始化 -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <!-- 对应的处理请求配置 -->
+  <servlet-mapping>
+  	<servlet-name>InitServlet</servlet-name>
+  	<url-pattern>/*</url-pattern>
+  </servlet-mapping>
+class: 需要实现 javax.servlet.http.HttpServlet 接口
+	public class InitServlet extends HttpServlet {
+
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public void init(ServletConfig config) throws ServletException {
+			super.init(config);
+			System.out.println("InitServlet-init");
+		}
+		
+		@Override
+		public void destroy() {
+			super.destroy();
+			System.out.println("InitServlet-destory");
+		}
+		
+	}

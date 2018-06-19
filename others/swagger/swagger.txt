@@ -1,0 +1,25 @@
+
+1. 一个API文档生成工具，可结合spring自动生成API文档
+
+@Api系列注解
+	@Api: 用在类上，说明该类的作用。可以标记一个Controller类做为swagger 文档资源
+		value, url的路径值
+		tags, 如果设置这个值、value的值会被覆盖
+		description, 对api资源的描述
+		produces, 指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回
+		consumes, 指定处理请求的提交内容类型,eg("application/json, application/xml")
+	@ApiOperation：用在方法上，说明方法的作用，每一个url资源的定义
+		value, 接口说明
+		notes, 接口发布说明
+		httpMethod, 接口请求方式
+		response, 接口返回参数类型
+	@ApiParam: 用在请求属性上，说明属性的一些定义
+		name, 参数名
+		value, 说明
+		required, 是否必传
+		allowableValues, 限定传值的范围
+	@ApiModel: 用在返回的类上
+	@ApiModelProperty: 用在返回类的属性上，对属性进行一些说明
+		value, 字段的一些说明
+		required, 是否必须
+		hidden, 是否隐藏，默认false

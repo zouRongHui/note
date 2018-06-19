@@ -1,0 +1,48 @@
+1.	菜单栏设置分隔线
+	addSeparator()
+	
+2.	窗口设置颜色
+	Library_Windows win = new Library_Windows();
+	Container con = win.getContentPane();
+	con.setBackground(Color.pink);
+	
+3.	窗口添加背景图片
+	JLabel bgi = new JLabel(new ImageIcon("路径"));
+	bgi.setBounds(0, 0, "width", "health");
+	this.add(bgi);
+	/*路径:默认路径为该项目文件下，如目标文件在别的文件夹下可使用"../"选取路径，也可使用绝对路径*/
+	
+4.	类之间传值问题
+	lass A 和class B, 如果要将B中产生的某个变量传递给A，则在B类中组合类A，用B的对象的成员A对象调用A的方法传值。
+	
+5.	密码框设置
+	text = new JPasswordField(20);//没有明文显示
+	
+6.	如何判断一个文本框中没有值
+	String s = JTextField.getText();
+	if (s.equals("")) {
+	}
+	
+7.	设置日期格式
+	//设置日期格式
+	DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+	System.out.println(df.format(Date));
+	
+8.	退出程序
+	em.exit(0);
+	
+9.	一个监视器多用途
+	public Object getSource() 返回事件源
+	public String getActionCommand() 返回和事件源相关的一个命令字符串（事件源可用setActionCommand()设置相关的命令字符串）
+	(JMenuItem menuitem1_1 = new JMenuItem("登陆");
+	menuitem1_1.addActionListener(listener1);
+	   该监视器触发后调用getActionCommand() 将返回 "登陆"   ）
+	   
+10.	引入自定义包中的类-同目录
+	将包置于在该文件的目录下，包中的类为共有类
+	注：包名不能是java中类库的名字
+	
+11.	组件设置大小
+	setPreferredSize(new Dimension(width, height));
+	setPreferredSize在使用布局管理器时使用，布局管理器会获取空间的PreferredSize
+	setSize,setLocation,setBounds需要在不使用布局管理器时使用，即使用setLayout(null)时使用

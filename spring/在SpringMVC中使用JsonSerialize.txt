@@ -1,0 +1,44 @@
+
+1. @JsonSerialize 用来自定义一些Java类的Json格式
+
+2. 语法，可修饰类/属性
+    @JsonSerialize(using=自定义的JsonSerializer)
+
+3. 常用场景：
+    在SpringMVC中实现对时间格式的转换，对一些属性的过滤啊
+    
+4. demo：在SpringMVC中实现对时间格式的转换
+JsonSerializerTest，自定义的JsonSerializer
+    public class JsonSerializerTest extends JsonSerializer<Date> {
+
+        @Override
+        public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+                throws IOException, JsonProcessingException {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年HH月dd日 hh:MM:ss");
+            jsonGenerator.writeString(simpleDateFormat.format(date));
+        }
+    }
+ViewLog，需要返回数据模型
+    public class ViewLog {
+        private String des;
+        @JsonSerialize(using = JsonSerializerTest.class)
+        private Date date;
+        ....
+    }
+controller
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public ViewLog test() {
+        return new ViewLog("test.", new Date());
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

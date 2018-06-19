@@ -1,0 +1,3 @@
+
+1.使用注解时，在传参时没有指定属性会默认给该注解的value属性赋值
+	@RequestMapping("/test") 等价于 @RequestMapping(value = "/test")

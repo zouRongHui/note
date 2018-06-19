@@ -1,0 +1,5 @@
+
+final,finally,finalize
+	final用来修饰类、方法、变量，Final类不能被继承方法，Final方法不能被重写，Final变量是不可变的；
+	finally是和try{}catch{}配套使用，一般用来释放一些占用的资源；
+	finalize是Object类的一个方法，用来实现对资源的回收。

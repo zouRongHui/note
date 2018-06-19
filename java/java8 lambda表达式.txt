@@ -1,0 +1,65 @@
+
+1. lambda表达式也就是接口的匿名类的一种简写方式，例如线程：
+原先：
+    Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            System.out.println("hello thread...");
+        }
+    });
+lambda：
+    Thread thread = new Thread(() -> System.out.println("hello lambda..."));
+    
+  1). 普通的函数或方法通常有 4 个元素：
+        一个名称、返回类型、参数列表、主体
+      而lambda表达式只有后两个元素。
+  
+2. 语法：会根据参数个数去匹配接口中声明的方法，所以lambda表达式实现的接口中需要实现的方法的参数个数要唯一
+    (参数) -> {方法体}
+
+3. Demo:
+    public static void main(String[] args) {
+        Thread thread = new Thread(() -> System.out.println("hello lambda..."));
+        thread.start();
+        
+        String publicParam = "lambda";
+        test(str -> System.out.println(str + publicParam));
+
+        test((num, count) -> System.out.println(num + " , " + count));
+
+        test((num, count) -> {
+            num = num + 1;
+            System.out.println(num * count);
+        });
+    }
+
+    public static void test(Demoable demo) {
+        demo.doAction(3);
+    }
+
+    public static void test(Snowable snow) {
+        snow.doAction(3, 5);
+    }
+
+    public interface Demoable {
+        void doAction(Integer num);
+    }
+
+    public interface Snowable {
+        void doAction(Integer num, Integer count);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

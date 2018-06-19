@@ -1,0 +1,2 @@
+
+org.springframework.transaction.interceptor.TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

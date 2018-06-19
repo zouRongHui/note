@@ -1,0 +1,97 @@
+
+1. 将一个业务流程拆分交于多个线程去执行，
+	例如餐馆点餐，
+		生产者(我)：提交一个订单(需要一碗面条)，
+		消费者(厨房)：完成订单(做出一碗面条)，
+		内存缓冲区(服务员)：记录订单。
+
+2.Demo：生产者生产一个Long数据，消费者控制台打印出来(消费)
+public class Test {
+	
+	public static void main(String[] args) {
+		int length = 10;
+		List<Long> queue = new ArrayList<Long>(10);
+		Producter p1 = new Producter(queue, length);
+		Producter p2 = new Producter(queue, length);
+		Producter p3 = new Producter(queue, length);
+		Consumer c1 = new Consumer(queue);
+		Consumer c2 = new Consumer(queue);
+		Consumer c3 = new Consumer(queue);
+		ExecutorService service = Executors.newCachedThreadPool();
+		service.execute(p1);
+		service.execute(p2);
+		service.execute(p3);
+		service.execute(c1);
+		service.execute(c2);
+		service.execute(c3);
+	}
+
+}
+
+class Consumer implements Runnable {
+	
+	private List<Long> queue;
+	
+	public Consumer(List<Long> queue) {
+		this.queue = queue;
+	}
+
+	@Override
+	public void run() {
+		try {
+			while (true) {
+				if (Thread.currentThread().isInterrupted()) {
+					break;
+				}
+				Long data = null;
+				synchronized (queue) {
+					if (queue.size() == 0) {
+						queue.wait();
+						queue.notifyAll();
+					}
+					data = queue.remove(0);
+				}
+				System.out.println(Thread.currentThread().getId() + "消费了：" + data);
+				Thread.sleep(1000);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+}
+
+class Producter implements Runnable {
+	private List<Long> queue;
+	private int length;
+	
+	public Producter(List<Long> queue, int length) {
+		this.queue = queue;
+		this.length = length;
+	}
+
+	@Override
+	public void run() {
+		try {
+			while (true) {
+				if (Thread.currentThread().isInterrupted()) {
+					break;
+				}
+				Long temp = (new Random()).nextLong();
+				System.out.println(Thread.currentThread().getId() + "生产了：" + temp);
+				synchronized (queue) {
+					if (queue.size() >= length) {
+						queue.notifyAll();
+						queue.wait();
+					} else {
+						queue.add(temp);
+					}
+					Thread.sleep(1000);
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+}

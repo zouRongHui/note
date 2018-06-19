@@ -1,0 +1,7 @@
+
+1. 如何定时执行 test() 方法？
+答：setTimeout("test()", 1000);
+
+2. var a = 10;var b = 20;alert(a = b);输出20.
+
+3. 

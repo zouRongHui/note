@@ -1,0 +1,7 @@
+
+1.安装后设置root密码
+	sudo passwd root 提示 Enter new UNIX password:
+	此时输入两次密码(root密码)，提示 passwd: password update successfully 即为完成
+	可以用 su root 来验证设置密码是否成功
+	
+2.ctrl+alt+T 快捷打开 Terminal 

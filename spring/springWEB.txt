@@ -1,0 +1,22 @@
+Demo springWeb_study的com.web.
+1. 在非WEB项目中，是在调用的方法手动去new 一个applicationContext 对象，然后获取需要的Bean；
+	在WEB项目中，是将applicationContext 对象放在application 域中，在服务启动时创建实例。
+具体流程：
+①.在 ServletContextListener 接口的contextInitialized(ServletContextEvent sce) 方法中创建 IOC 容器；
+②.在web.xml中注册上述的实现类；
+③.在其他组件中，从 application 域对象中得到 IOC 容器的引用；
+spring已经对上述流程进行了封装
+①.web.xml
+  <!-- spring 的配置文件位置 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:com/web/applicationContext.xml</param-value>
+  </context-param>
+  
+  <!-- 启动 IOC 容器的 ServletContextListener -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+②.在组件中，可用如下的方式获取applicationContext 引用
+	ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(ServletContext);

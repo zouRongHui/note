@@ -1,0 +1,16 @@
+
+在我们查询Parent对象的时候，默认只有Parent的内容，并不包含childs的信息，
+如果在Parent.hbm.xml里设置lazy="false"的话才同时取出关联的所有childs内容.
+问题是我既想要hibernate默认的性能又想要临时的灵活性该怎么办？ 
+这就是fetch的功能，让你用一句外键关联的sql同时查询出来Parent和childs的内容
+
+eg.
+	String hql = "from Item i left join fetch i.order left join fetch i.product where i.order.id=:paras0 order by i.sort";
+	
+	Item.java {
+		@ManyToOne(fetch=FetchType.LAZY)
+		private Product product;
+	
+		@ManyToOne(fetch=FetchType.LAZY)
+		private Order order;
+	}

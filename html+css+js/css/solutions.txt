@@ -1,0 +1,7 @@
+
+1). 设置悬浮底部
+    position: fixed;
+    bottom: 0rpx;
+    
+2). 设置右对齐
+    text-align:right

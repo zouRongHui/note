@@ -1,0 +1,58 @@
+Demo: Spring_study的 com.jdbc.transaction.
+1.事务一些属性配置
+	1).propagation 事务的传播，即在事务方法调用其他事务方法时，事务的工作模式。
+		常用的两个事务传播行为：
+			REQUIRED：默认项，公用同一个事务，即无论哪个子事务回滚，所有事务都回滚；
+			REQUIRES_NEW：开启新的事务，若子事务回滚只回滚当前事务；
+	2).isolation 事务的隔离级别，事务并发中的读取脏数据、不可重复读取、幻读；
+	3).noRollbackFor、noRollbackForClassName、rollbackFor、rollbackForClassName 
+		来指定哪些异常不需要回滚和只回滚哪些异常；
+	4).readOnly(true/false) 指定事务是否为只读，便于帮助数据库引擎优化事务；
+	5).timeout(单位秒) 用来表明事务的最长执行时间，超时就会强制回滚；
+	
+2.使用注解来实现
+xml：
+	<!-- 使用@Transactional 注解来配置事务 -->
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" 
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- 首先需要配置一个数据源，这里只能使用构造器配置 -->
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 启用事务注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+Class：
+	//在持久层中对具体的方法使用@Transactional 注解
+	@Transactional(propagation=Propagation.REQUIRED,
+			isolation=Isolation.READ_COMMITTED,
+			rollbackFor={Exception.class},
+			readOnly=true,
+			timeout=3)
+	public void doSomething() {..}
+	
+3.使用xml文件来配置
+<!-- 使用xml来配置事务 -->
+<!-- 1.配置事务管理器 -->
+<bean id="transactionManager" 
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource"></property>
+</bean>
+<!-- 2.设置事务的属性 -->
+<tx:advice id="txAdvice" transaction-manager="transactionManager">
+	<tx:attributes>
+		<!-- 
+			name：哪个方法需要配置属性；
+			使用相应的属性来配置；
+		 -->
+		<tx:method name="*" />
+	</tx:attributes>
+</tx:advice>
+<!-- 3.配置事务切面 -->
+<aop:config>
+	<!-- 定义切点表达式 -->
+	<aop:pointcut expression="execution(* com.jdbc.transaction.NewsService.doSomething(..))" id="txPointCut"/>
+	<!-- 关联事务属性和切点 -->
+	<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
+</aop:config>

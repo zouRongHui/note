@@ -1,0 +1,5 @@
+
+1. 有一个spring boot项目作为服务注册中心,
+	多个spring boot作为具体的服务项
+
+2. 

@@ -1,0 +1,147 @@
+
+0. 参考：https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/
+
+1. Stream 是对集合（Collection）对象功能的增强，
+    它专注于对集合对象进行各种非常便利、高效的聚合操作（aggregate operation），
+    或者大批量数据操作 (bulk data operation)。
+    同时它提供串行和并行两种模式进行汇聚操作，并发模式能够充分利用多核处理器的优势。
+    
+2. 语法：
+  1). 流的获取
+    // 1. Individual values
+    Stream stream = Stream.of("a", "b", "c");
+    // 2. Arrays
+    String [] strArray = new String[] {"a", "b", "c"};
+    stream = Stream.of(strArray);
+    stream = Arrays.stream(strArray);
+    // 3. Collections
+    List<String> list = Arrays.asList(strArray);
+    stream = list.stream();    
+  2). 流的操作类型分为两种：
+    Intermediate：一个流可以后面跟随零个或多个 intermediate 操作。
+      其目的主要是打开流，做出某种程度的数据映射/过滤，然后返回一个新的流，交给下一个操作使用。
+      这类操作都是惰性化的（lazy），就是说，仅仅调用到这类方法，并没有真正开始流的遍历。
+    Terminal：一个流只能有一个 terminal 操作，当这个操作执行后，流就被使用“光”了，无法再被操作。
+      所以这必定是流的最后一个操作。Terminal 操作的执行，才会真正开始流的遍历，并且会生成一个结果，
+      或者一个 side effect。
+  3). Intermediate：
+      map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 peek、 
+      limit、 skip、 parallel、 sequential、 unordered
+  4). Terminal：
+      forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、
+      count、 anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 iterator
+3. Demo
+  map/flatMap,就是把 input Stream 的每一个元素，映射成 output Stream 的另外一个元素。
+    =========
+    //转成大写
+    List<String> wordList = Arrays.asList("Java", "C", "C++", "JavaScript", "Python");
+    List<String> output = wordList.stream().
+            map(String::toUpperCase).
+            collect(Collectors.toList());
+    System.out.println(output);
+    
+    //平方数
+    List<Integer> nums = Arrays.asList(1, 2, 3, 4);
+    List<Integer> squareNums = nums.stream().
+            map(n -> n * n).
+            collect(Collectors.toList());
+    System.out.println(squareNums);
+    
+    //flatMap,一对多
+    //flatMap 把 input Stream 中的层级结构扁平化，就是将最底层元素抽出来放到一起，
+    // 最终 output 的新 Stream 里面已经没有 List 了，都是直接的数字。
+    Stream<List<Integer>> inputStream = Stream.of(
+            Arrays.asList(1),
+            Arrays.asList(2, 3),
+            Arrays.asList(4, 5, 6)
+    );
+    Stream<Integer> outputStream = inputStream.
+            flatMap((childList) -> childList.stream());
+    System.out.println(outputStream.collect(Collectors.toList()));
+    =========
+  filter,对原始 Stream 进行某项测试，通过测试的元素被留下来生成一个新 Stream。
+    =========
+    //过滤掉非偶数
+    Integer[] sixNums = {1, 2, 3, 4, 5, 6};
+    Integer[] evens = Stream.of(sixNums).filter(n -> n%2 == 0).toArray(Integer[]::new);
+    Arrays.stream(evens).forEach(System.out::print);
+    =========
+  forEach,接收一个 Lambda 表达式，然后在 Stream 的每一个元素上执行该表达式。
+    =========
+    //打印内容
+    List<String> strList = Arrays.asList("one", "two", "three", "four");
+    strList.stream().forEach(System.out::println);
+
+    //peek 操作也具有相似功能，只是 peek 是 Intermediate 操作，而 forEach 是 Terminal 操作
+    List<String> list = Stream.of("one", "two", "three", "four")
+            .filter(e -> e.length() > 3)
+            .peek(e -> System.out.println("Filtered value: " + e))
+            .map(String::toUpperCase)
+            .peek(e -> System.out.println("Mapped value: " + e))
+            .collect(Collectors.toList());
+    System.out.println(list);
+    =========
+  findFirst,它总是返回 Stream 的第一个元素，或者空。
+    =========
+    System.out.println(Stream.of("one", "two", "three", "four").findFirst());
+    =========
+  reduce,是把 Stream 元素组合起来。它提供一个起始值（种子），然后依照运算规则（BinaryOperator），
+    和前面 Stream 的第一个、第二个、第 n 个元素组合。
+    =========
+    // 字符串连接，concat = "ABCD"
+    String concat = Stream.of("A", "B", "C", "D").reduce("", String::concat);
+    System.out.println("concat = " + concat);
+    // 求最小值，minValue = -3.0
+    double minValue = Stream.of(-1.5, 1.0, -3.0, -2.0).reduce(Double.MAX_VALUE, Double::min);
+    System.out.println("minValue = " + minValue);
+    // 求和，sumValue = 10, 有起始值
+    int sumValue = Stream.of(1, 2, 3, 4).reduce(0, Integer::sum);
+    System.out.println("sumValue = " + sumValue);
+    // 求和，sumValue = 10, 无起始值
+    sumValue = Stream.of(1, 2, 3, 4).reduce(Integer::sum).get();
+    System.out.println("sumValue = " + sumValue);
+    // 过滤，字符串连接，concat = "ace"
+    concat = Stream.of("a", "B", "c", "D", "e", "F").
+            filter(x -> x.compareTo("Z") > 0).
+            reduce("", String::concat);
+    System.out.println("concat = " + concat);  
+    =========
+  limit/skip,limit 返回 Stream 的前面 n 个元素；skip 则是扔掉前 n 个元素。
+    =========
+    System.out.println(Stream.of("one", "two", "three", "four", "five").limit(3).collect(Collectors.toList()));
+    System.out.println(Stream.of("one", "two", "three", "four", "five").skip(3).collect(Collectors.toList()));
+    =========
+  sorted,进行排序，你可以首先进行各类 map、filter、limit、skip 甚至 distinct 来减少元素数量后，再排序，这能帮助程序明显缩短执行时间。
+    =========
+    System.out.println(Stream.of(35, 43, 2, 103).sorted().collect(Collectors.toList()));
+    System.out.println(Stream.of("one", "two", "three", "four").sorted((p1, p2) -> p1.compareTo(p2)).collect(Collectors.toList()));
+    =========
+  min/max/distinct,min 最小，max 最大，distinct 去重
+    =========
+    System.out.println(IntStream.of(12, 3, 4, 32, 98, 3).max().getAsInt());
+    System.out.println(IntStream.of(12, 3, 4, 32, 98, 3).min().getAsInt());
+    System.out.println(Stream.of("java", "c", "php", "java", "c++", "c#").distinct().collect(Collectors.toList()));
+    =========
+  Match
+    allMatch：Stream 中全部元素符合传入的 predicate，返回 true
+    anyMatch：Stream 中只要有一个元素符合传入的 predicate，返回 true
+    noneMatch：Stream 中没有一个元素符合传入的 predicate，返回 true
+    =========
+    System.out.println(Stream.of("java", "c", "c++").allMatch(p -> p.length() > 1));
+    System.out.println(Stream.of("java", "c", "c++").anyMatch(p -> p.equals("c")));
+    System.out.println(Stream.of("java", "c", "c++").noneMatch(p -> p.equals("php")));
+    =========
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

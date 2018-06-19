@@ -1,0 +1,64 @@
+
+1. Filter过滤器，介于客户端和服务端资源之间，顾名思义是起过滤作用的。
+	一般用于登录权限验证、资源访问权限验证、字符编码转换等。
+	
+2.语法
+1). 自定义的Filter类需要实现 javax.servlet.Filter 接口；
+2). 在doFilter()方法中实现过滤逻辑；
+3). 在web.xml中配置Filter
+	①. 在web.xml中，配置顺序为 listener > filter > servlet，初始化(init())顺序也是如此，销毁方法(destory())正好相反;
+	②. 
+	  <!-- 过滤器配置：将一个名字与一个实现javaxs.servlet.Filter接口的类相关联 -->
+	  <filter>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<filter-class>com.test.filter.SetCharacterEncoding</filter-class>
+		<!-- 可在init方法中获取这里设置的参数 -->
+		<init-param>
+		  <param-name>encoding</param-name>
+		  <param-value>UTF-8</param-value>
+		</init-param>
+	  </filter>
+	  <!-- 设置启用过滤器的请求，可设置多组 -->
+	  <filter-mapping>
+		<filter-name>SetCharacterEncoding</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	  </filter-mapping>
+	  
+demo:
+public class SetCharacterEncoding implements Filter {
+
+	/**
+	 * 服务关闭时调用
+	 */
+	@Override
+	public void destroy() {
+		System.out.println("filter-destory");
+	}
+
+	/**
+	 * 每次符合过滤器设置的请求时触发
+	 */
+	@SuppressWarnings("unused")
+	@Override
+	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
+			throws IOException, ServletException {
+		System.out.println("filter-do");
+		
+		//获取Http编程的一些基础对象
+		HttpServletRequest request = (HttpServletRequest) arg0;
+		HttpServletResponse response = (HttpServletResponse) arg1;
+		HttpSession session = request.getSession();
+		
+		//通过过滤，递交给下一个过滤器或具体的处理方法
+		arg2.doFilter(request, response);
+	}
+
+	/**
+	 * 服务启动时就会初始化
+	 */
+	@Override
+	public void init(FilterConfig arg0) throws ServletException {
+		System.out.println("filter-init and the encoding is " + arg0.getInitParameter("encoding"));
+	}
+
+}

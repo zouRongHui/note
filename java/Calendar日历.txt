@@ -1,0 +1,30 @@
+
+
+
+
+设置/获取，年份
+Calendar.set(Calendar.YEAR, Calendar.get(Calendar.YEAR));
+设置/获取，月份，默认一月为0  
+Calendar.set(Calendar.MONTH, Calendar.get(Calendar.MONTH));
+设置/获取，天
+Calendar.set(Calendar.DAY_OF_MONTH, Calendar.get(Calendar.DAY_OF_MONTH));
+设置/获取，小时
+Calendar.HOUR(十二小时制),Calendar.HOUR_OF_DAY(二十四小时制)
+Calendar.set(Calendar.HOUR_OF_DAY, Calendar.get(Calendar.HOUR_OF_DAY));
+设置/获取，分钟
+Calendar.set(Calendar.MINUTE, Calendar.get(Calendar.MINUTE));
+设置/获取，秒
+Calendar.set(Calendar.SECOND, Calendar.get(Calendar.SECOND));
+设置/获取，毫秒
+Calendar.set(Calendar.MILLISECOND, Calendar.get(Calendar.MILLISECOND));
+
+
+获取某个月的天数最大值
+Calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+
+日期增减
+Calendar.add(Calendar.MONTH, -1);	//月份减一
+Calendar.add(Calendar.MONTH, 1);	//月份加一
+Calendar.add(Calendar.DAY_OF_MONTH, -1);	//天数减一
+ ....

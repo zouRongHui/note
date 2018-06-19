@@ -1,0 +1,81 @@
+Demo: Spring_study的com.spring.hibernate.
+将hibernate 的sessionFactory 交给spring容器管理，并且也将事务交由spring 管理。
+Demo：
+XML：
+	<!-- 配置 C3P0 数据源 -->
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="user" value="root"></property>
+		<property name="password" value="root"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test"></property>
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+
+		<property name="initialPoolSize" value="5"></property>
+		<property name="maxPoolSize" value="10"></property>
+	</bean>
+	
+	<!-- 配置 Hibernate 的 SessionFactory： -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 配置数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 使用 Hibernate 自身的配置文件设置相关属性 -->
+		<!-- 
+		<property name="configLocation" value="classpath:" />
+		 -->
+		<!-- 使用 hibernateProperties来配置相关 Hibernate 属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<!-- 设置使用注解的实体类 -->
+		<property name="packagesToScan" value="com.spring.hibernate" />
+		<!-- 设置关联的.hbm.xml文件 -->
+		<!-- 
+		<property name="mappingLocations" value="classpath:com/spring/hibernate/*.hbm.xml" />
+		 -->
+	</bean>
+	
+	<!-- 配置 Spring 声明式事务 -->
+	<!-- 1. 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 2. 配置事务属性 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice>
+	<!-- 3. 配置事务切点，并把切点和事务属性关联起来 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.spring.hibernate.*.*(..))" id="txPointCut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
+	</aop:config>
+	
+Class：
+	在持久化层使用 org.hibernate.SessionFactory 接受配置中的 sessionFactory Bean
+	@Repository
+	class StoreDao {
+		
+		@Autowired
+		private SessionFactory sessionFactory;
+		
+		private Session getSession() {
+			return sessionFactory.getCurrentSession();
+		}
+		
+		public void updateStore(Integer id) {
+			String hql = "SELECT s.count FROM Store s WHERE s.id=:id";
+			Integer count = (Integer) getSession().createQuery(hql).setParameter("id", id).uniqueResult();
+			if (count < 2) {
+				throw new NullPointerException("库存不足");
+			}
+			hql = "UPDATE Store s SET s.count=s.count-1 WHERE s.id=:id";
+			getSession().createQuery(hql).setParameter("id", id).executeUpdate();
+		}
+
+	}

@@ -1,0 +1,131 @@
+Workbook 是Excel的接口
+	HSSFWorkbook 是 .xls的Workbook实现类
+	XSSFWorkbook 是 .xlsx的Workbook实现类
+Sheet 工作表
+Row 行
+Cell 单元格
+jar包
+poi-3.11-20141221.jar		使用xls
+poi-ooxml-3.11-20141221.jar		使用xlsx
+poi-ooxml-schemas-3.11-20141221.jar		被依赖的包
+poi-scratchpad-3.7-20101029.jar		操作word、ppt、viso、outlook等时
+
+Tip：注意.xls和.xlsx的单个sheet的极值
+	.xls最大行数是65536行
+
+
+###Excel导入
+import java.io.File;
+import java.io.FileInputStream;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+//1.获取文件并创建Workbook
+Workbook book = null;
+String fileName = "D:\\product_2003.xls";
+File file = new File(fileName);
+FileInputStream is = new FileInputStream(file); 
+if(fileName.toLowerCase().endsWith("xls")) {  	//2003	
+	book = new HSSFWorkbook(is);
+} else if(fileName.toLowerCase().endsWith("xlsx")) {	 //2007
+	book = new XSSFWorkbook(is);
+}
+//2.获取Sheet
+Sheet sheet = book.getSheet("");	//根据Sheet名获取
+Sheet sheet = book.getSheetAt(0);	//根据索引来获取
+//3.根据Sheet获取单元格数据
+//遍历Sheet，sheet.getLastRowNum()获取的是最后一行的编号（编号从0开始）
+for (int i = 1; i <= sheet.getLastRowNum(); i++) {		
+	Row row = sheet.getRow(i);		//根据行数获取每行数据
+	if (row == null) {
+		continue;
+	}
+	Cell cell = null;
+	String cellString = "";
+	
+	for (int j = 0; j < row.getLastCellNum(); j++) {
+		cell = row.getCell(j);
+		if (getCellValue(cell) != null) {
+			cellString = getCellValue(cell).toString();
+		} else {
+			cellString = "";
+		}
+		System.out.println(cellString);
+	}
+}
+//4.处理单元格数据的方法
+public Object getCellValue(Cell cell) {
+	if (cell != null) {
+	//根据单元格数据类型分情况处理,共六种类型还有CELL_TYPE_BLANK ：空值、CELL_TYPE_ERROR ： 错误
+	 switch (cell.getCellType()) {		
+		case Cell.CELL_TYPE_STRING:		//字符串型
+			return cell.getRichStringCellValue().getString().trim();	//String
+		case Cell.CELL_TYPE_NUMERIC:	//数值型
+			//在Excel中的Date类型也是以Double类型的数字存储的,需要判断一下
+			if (DateUtil.isCellDateFormatted(cell)) {
+				return cell.getDateCellValue();		//Date
+			} else {
+				return cell.getNumericCellValue();	//Double
+			}
+		case Cell.CELL_TYPE_BOOLEAN:	//布尔型
+			return String.valueOf(cell.getBooleanCellValue()).trim();	//String
+		case Cell.CELL_TYPE_FORMULA:	//公式型
+			FormulaEvaluator evaluator = cell.getSheet().getWorkbook().getCreationHelper().createFormulaEvaluator();
+			return evaluator.evaluate(cell).getNumberValue();	//Double
+	 }
+	}
+	return null;
+}
+
+
+
+
+
+
+###Excel导出
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+//1.新建工作薄、工作表、行、单元格
+HSSFWorkbook workbook = new HSSFWorkbook();
+HSSFSheet sheet = workbook.createSheet("表1");
+HSSFRow row = null;
+HSSFCell cell = null;
+//2.设置行数和列数
+int rowCount = 3;
+int cellCount = 5;
+//3.为单元格设置值
+for (int i = 0; i < rowCount; i++) {
+	//创建行
+	row = sheet.createRow(i);
+	for (int j = 0; j < cellCount; j++) {
+		//创建单元格
+		cell = row.createCell(j);
+		//设置单元格数据类型
+		cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+		//设置值
+		cell.setCellValue(i + " , " + j);
+	}
+}
+//4.创建文件
+File file = new File("D:\\rone.xls");
+if (!file.exists()) {
+	file.createNewFile();
+}
+//5.将工作薄输出，并删除文件
+OutputStream os = new FileOutputStream(file);
+workbook.write(os);
+file.delete();
+
+
+

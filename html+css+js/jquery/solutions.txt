@@ -1,0 +1,28 @@
+
+0. 转换为原生JS对象
+    $("#XXX")[0]
+
+1. 获取select选中的值和文本
+    $("#id option:selected").val();
+    $("#id option:selected").text();
+    
+2. 获取第一个子元素
+    $("#id").children("标签:first-child");
+    eg.
+        $("#liAreaConfigSellPriceAna").children("a:first-child").attr("href","javascript:void(0)");
+        
+3. 判断checkbox是否选中
+    if ($("#checkbox-id")get(0).checked) {do something}
+    if($('#checkbox-id').is(':checked')) {do something}
+    if ($('#checkbox-id').attr('checked')) {do something}
+    
+4. 设置JS代码在页面加载完全后执行
+    $(function() {
+        JS code
+    });
+    这个是在页面DOM文档加载完成后加载执行的，等效于$(document).ready(function(){...}); 
+    优于window.onload，后者必须等到页面内包括图片的所有元素加载完毕后才能执行。
+
+5.
+
+6.

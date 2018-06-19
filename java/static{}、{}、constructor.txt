@@ -1,0 +1,58 @@
+
+
+static{} 静态代码块，仅执行一次；
+{} 构造代码块，在构造器执行之前执行，用于处理多个构造器情况下的共同抽象部分；
+构造器
+执行循序：static{} -> {} -> constructor
+
+Demo：
+public class Test {
+	public static void main(String[] args) {
+		DemoB demoB = new DemoB();
+		System.out.println();
+		DemoB b = new DemoB();
+		
+	}
+	/* 输出
+	static DemoA
+	static DemoB
+	this is DemoA.class.
+	DemoA 构造器。
+	this is DemoB.class.
+	DemoB 构造器。
+
+	this is DemoA.class.
+	DemoA 构造器。
+	this is DemoB.class.
+	DemoB 构造器。
+	*/
+}
+
+class DemoA {
+	//构造器
+	public DemoA() {
+		System.out.println("DemoA 构造器。");
+	}
+	//构造代码块，在构造器执行之前执行，用于处理多个构造器情况下的共同抽象部分。
+	{
+		System.out.println("this is DemoA.class.");
+	}
+	//静态代码块，仅执行一次
+	static {
+		System.out.println("static DemoA");
+	}
+}
+
+class DemoB extends DemoA {
+	public DemoB() {
+		System.out.println("DemoB 构造器。");
+	}
+	
+	{
+		System.out.println("this is DemoB.class.");
+	}
+	
+	static {
+		System.out.println("static DemoB");
+	}
+}

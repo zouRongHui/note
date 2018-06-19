@@ -1,0 +1,26 @@
+1.List.contains(object); 判断list是否包含object
+
+2.for(object obj : List) {} 遍历List
+
+3.合并同类型的list： List.addAll(List)
+
+4.List和Set 互相转换
+	List = new ArrayList(Set);
+	Set = new HashSet(List);
+	
+5.List<String> 转 String[]
+	eg.
+	List<String> list = new ArrayList<String>();  
+	list.add("str1");  
+	list.add("str2");  
+	int size = list.size();  
+	String[] arr = (String[])list.toArray(new String[size]);
+	
+6.无内容的List的一些方法的返回值
+	List<String> strs = new ArrayList<String>();
+	strs.isEmpty();//true
+	strs.size();//0
+	strs.get(0);//java.lang.IndexOutOfBoundsException
+	
+7.截取List
+	List.subList(0, 6);//截取[0,6)

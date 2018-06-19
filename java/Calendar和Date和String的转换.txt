@@ -1,0 +1,35 @@
+1.Calendar 转化 String 
+//获取当前时间的具体情况,如年,月,日,week,date,分,秒等 
+Calendar calendat = Calendar.getInstance();
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+String dateStr = sdf.format(calendar.getTime());
+ 
+
+2.String 转化Calendar
+String str = "2010-5-27";
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+Date date = sdf.parse(str);
+Calendar calendar = Calendar.getInstance();
+calendar.setTime(date);
+ 
+ 
+3.Date 转化String
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+String dateStr = sdf.format(new Date());
+ 
+ 
+ 
+4.String 转化Date 
+String str = "2010-5-27";
+SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
+Date birthday = sdf.parse(str);
+ 
+ 
+5.Date 转化Calendar
+Calendar calendar = Calendar.getInstance();
+calendar.setTime(new java.util.Date());
+ 
+ 
+6.Calendar转化Date
+Calendar calendar = Calendar.getInstance();
+java.util.Date date = calendar.getTime();

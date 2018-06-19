@@ -1,0 +1,7 @@
+
+1. json -> JS
+    eg.
+    var txt = '{"firstName":"Thomas","lastName":"Carter"}';
+    var obj = JSON.parse(txt);
+    console.log(obj.firstName);
+    console.log(obj.lastName);

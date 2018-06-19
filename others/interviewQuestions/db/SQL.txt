@@ -1,0 +1,19 @@
+
+1.建表语句
+# 创建表 student 属性有id,name,sex,age，主键 id：
+create table `student` (
+	`id` int(11) not null,
+	`name` varchar(20) default null,
+	`sex` int(1) default null,
+	`age` int(3) default null,
+	primary key (`id`)
+)
+# 创建表 score 属性有 sId,course_name,grade，联合主键 s_id,course_name，外键 s_id 依赖于 student 表的 id :
+create table `score` (
+	`sId` int(11) not null,
+	`course_name` varchar(20) not null,
+	`grade` double(6,2) default null,
+	primary key (`s_id`,`course_name`),
+	constraint `` foregin key (`sId`) reference `student` (`id`)
+)
+

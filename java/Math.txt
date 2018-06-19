@@ -1,0 +1,5 @@
+1. 向上取整用Math.ceil(double a)
+
+2. 向下取整用Math.floor(double a)
+
+3. Math.random();基于系统时间生成一个[0,1.0)区间的随机小数。

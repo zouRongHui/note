@@ -1,0 +1,93 @@
+
+1.在整个系统中只有一个实例
+
+2.语法
+//懒汉式，线程不安全
+class Singleton1 {
+	private static Singleton1 instance;
+	
+	private Singleton1() {};
+	
+	public static Singleton1 getInstance() {
+		if (instance == null) {
+			instance = new Singleton1();
+		}
+		return instance;
+	}
+}
+
+//饿汉式，在加载时就创建实例，线程安全，存在浪费内存的情况
+class Singleton2 {
+	private final static Singleton2 instance = new Singleton2();
+	
+	private Singleton2() {};
+	
+	public static Singleton2 getInstance() {
+		return instance;
+	}
+}
+
+//双重检查式，在懒汉式的基础上加上了synchronized同步代码块，并实现双重检查实现线程安全
+class Singleton3 {
+	private static Singleton3 instance;
+	
+	private Singleton3() {};
+	
+	public static Singleton3 getInstance() {
+		if (instance == null) {
+			synchronized (Singleton3.class) {
+				if (instance == null) {
+					instance = new Singleton3();
+				}
+			}
+		}
+		return instance;
+	}
+}
+
+//静态内部类，线程安全，延迟加载
+class Singleton4 {
+	private static class Singleton4Instance {
+		private final static Singleton4 instance = new Singleton4();
+	}
+	
+	private Singleton4() {}
+	
+	public Singleton4 getInstance() {
+		return Singleton4Instance.instance;
+	}
+	
+}
+
+//枚举类，线程安全，防止反序列化重新创建新的对象
+enum Singleton5 {
+	INSTANCE;
+}
+
+3.反射机制对单例的影响
+    针对静态内部类，当获取一个单例的实例后，仍可通过反射机制创建第二个实例，两个hash值是不同的。
+    eg. 
+        System.out.println(Singleton4.getInstance().hashCode());
+        Constructor<Singleton4> constructor = Singleton4.class.getDeclaredConstructor();
+        constructor.setAccessible(true);
+        System.out.println(constructor.newInstance().hashCode());
+    解决方案：添加一个标识在构造器中阻止二次实例
+    eg.
+        private static boolean initialized = false;
+        private Singleton4() {
+            synchronized (Singleton4.class) {
+                if (initialized) {
+                    throw new RuntimeException("This class has his single instance..")
+                } else {
+                    initialized = true;
+                }
+            }
+        }
+    虽然该方案仍然存在缺陷，例如可通过反射修改 initialized 的值，来实现多次实例。
+    但反射机制一般开发人员不会直接使用，通常时一些框架去使用，所以上述的情况也基本不会发生。
+
+4.序列化对单例的影响
+    序列化底层是通过反射来实例化的，所以会破坏单例。
+    解决方案：创建一个private Object readResolve() { return getInstance(); } 方法，
+        反序列化底层会通过判断是否拥有该方法，来维护其单例特性。
+

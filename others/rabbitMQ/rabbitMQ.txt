@@ -1,0 +1,73 @@
+
+1. MQ:message queue消息队列，用于服务和服务之间通信。
+
+2. RabbitMQ中三大主体：发送者(生产者) producer，消息队列 queue，接受者(消费者)consumer
+  消息流程：producer -> queue -> consumer
+    producer和consumer之间是n:n的关系
+
+3. 消息确认机制
+    当queue向某个consumer发送消息后，由于不可知原因consumer没有完成该消息就down了，也就是说
+    这个消息丢失了。
+    消息确认机制就是当consumer接收消息后，完成逻辑操作后需要向queue进行反馈，
+    告诉queue消息已正确处理，此时queue就可以大胆的将该消息丢弃了。
+    
+4. 消息持久化
+    RabbitMQ支持将缓存中消息持久化到磁盘中
+    
+5. 消息的发送机制
+    当queue有多个consumer时，默认是公平分发机制，一人一个，循环发送。
+    可通过 Channel.basicQos(); 来设置最多同时接收的消息数。
+    
+Demo
+maven：
+    <groupId>com.rabbitmq</groupId>
+    <artifactId>amqp-client</artifactId>
+producer：    
+    public class Send {
+
+        private final static String QUEUE_NAME = "hello";
+
+        public static void main(String[] args) throws Exception {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.setHost("localhost");
+            Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel();
+
+            for (int i = 0; i < 99; i++) {
+                channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+                String message = "Hello World!" + i;
+                channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
+                System.out.println("[x] Sent '" + message + "'");
+            }
+
+            channel.close();
+            connection.close();
+        }
+
+    }
+
+consumer：
+    public class Recv {
+
+        private final static String QUEUE_NAME = "hello";
+
+        public static void main(String[] args) throws Exception {
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.setHost("localhost");
+            Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel();
+
+            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+
+            Consumer consumer = new DefaultConsumer(channel) {
+                @Override
+                public void handleDelivery(String consumerTag, Envelope envelope,
+                                           AMQP.BasicProperties properties, byte[] body) throws UnsupportedEncodingException {
+                    String message = new String(body, "UTF-8");
+                    System.out.println(" [x] Received '" + message + "'");
+                }
+            };
+            channel.basicConsume(QUEUE_NAME, true, consumer);
+        }
+    }

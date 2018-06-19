@@ -1,0 +1,61 @@
+
+1. String.split()拆分字符串成数组
+	1、如果用“.”作为分隔的话,必须是如下写法,String.split("\\."),这样才能正确的分隔开,不能用String.split(".");
+	2、如果用“|”作为分隔的话,必须是如下写法,String.split("\\|"),这样才能正确的分隔开,不能用String.split("|");
+	“.”和“|”都是转义字符,必须得加"\\";
+	3、如果在一个字符串中有多个分隔符,可以用“|”作为连字符,比如,“acount=? and uu =? or n=?”,把三个都分隔出来,可以用String.split("and|or");
+	
+2. String.replace("oldChar", "newChar");
+	String.replaceAll("oldChar", "newChar");支持正则表达式，且需要转义字符
+	
+3. 数组转String
+	org.apache.commons.lang.StringUtils.join(Object)// 将数组变成字符串
+	org.apache.commons.lang.StringUtils.join(Object, ",")// 将数组用逗号分隔变成字符串
+	
+4. 长字符串数字做数学运算
+	BigDecimal num = new BigDecimal(Srting);   将String转换成BigDecimal数据，再使用BigDecimal的方法进行运算
+	
+5. 截取字符串
+	String.substring(int beginIndex);   截取从beginIndex开始到结尾的字符串并返回
+	String.substring(int beginIndex, int endIndex);   截取从beginIndex开始到endIndex的字符串并返回
+	
+6. 查找字符
+	String.indexOf(String str);   返回此字符串中第一次出现str的索引
+	
+7. 替换字符
+	String.replace(String str1, String str2);   用str2去替换掉str1
+	例如剔除ab123you456中的除数字外的其余部分：
+	s = "ab123you456";
+	regex = "\\p{Alpha}";
+	s = s.replaceAll(regex, "");
+	
+8. 对字符串的分解、重组，StringTokenizer 用来对目标String进行分解
+	StringTokenizer三种构造方法
+		1.StringTokenizer(String str)。默认以” \t\n\r\f”（前有一个空格，引号不是）为分割符。
+			StringTokenizer st = new StringTokenizer("a  b  c    d");
+			while (st.hasMoreTokens()) {
+				System.out.print(st.nextToken() + "*");
+			}
+			输出：a*b*c*d*
+		2.StringTokenizer(String str, String delim)。指定delim为分割符
+			StringTokenizer st = new StringTokenizer("www.ooobj.com", ".b");
+			while (st.hasMoreTokens()) {
+				System.out.print(st.nextToken() + ".");
+			}
+			输出：www*ooo*j*com*
+		3.StringTokenizer(String str, String delim, boolean returnDelims)。returnDelims为true的话则delim分割符也被视为标记。
+			StringTokenizer st = new StringTokenizer("www.ooobj.com", ".", true);  
+			while (st.hasMoreTokens()) {
+				System.out.print(st.nextToken() + ".");
+			}
+			输出：www*.*ooobj*.*com*
+			
+9. intern()方法用于复用字符串，将相同的字符串指向同一引用；
+		String s1 = "Java";
+		String s2 = new String("Java");		
+		System.out.println(s1 == s2);//false
+		System.out.println(s1.intern() == s2.intern());//true
+		
+10. String.equalsIgnoreCase(String);//忽略大小写的比较大小
+
+

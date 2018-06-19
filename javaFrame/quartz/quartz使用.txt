@@ -1,0 +1,54 @@
+quartz任务调度
+jar包: quartz-2.2.3.jar, slf4j-api-1.7.7.jar, slf4j-log4j12-1.7.7.jar
+实现了Job的任务类, 任务入口
+public class MyJob implements org.quartz.Job{
+	@Override
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		System.out.println("汉字Quartz : " + new Date());
+	}
+}
+
+main方法, 程序入口
+		try {
+			//创建一个SchedulerFactory对象
+			org.quartz.SchedulerFactory schedulerFactory = new org.quartz.impl.StdSchedulerFactory();
+			//通过schedulerFactory获取一个调度器
+			org.quartz.Scheduler scheduler = schedulerFactory.getScheduler();
+			//创建jobDetail实例。绑定Job实现类，指明job的名称，所在组的名称，以及绑定的Job类
+			org.quartz.JobDetail job = org.quartz.JobBuilder.newJob(MyJob.class).withIdentity("job1", "group1").build();
+			//Trigger 使用simpleTrigger规则
+//		org.quartz.Trigger trigger = org.quartz.TriggerBuilder.newTrigger().withIdentity("simple", "triggerGroup")
+//			.withSchedule(org.quartz.SimpleScheduleBuilder.repeatSecondlyForever(5).withRepeatCount(8)).startNow().build();
+			//Trigger 使用cornTrigger规则
+			//"10 * * * * ? *"
+//		字段	允许值	允许的特殊字符
+//		秒  0-59	,-*/
+//		分	0-59	,-*/
+//		时	0-23	,-*/
+//		日	1-31	,-*?/LWC
+//		月	1-12或者JAN-DEC	,-*/
+//		星期	1-7或者SUN-SAT	,-*?/LC#
+//		年	留空,1970-2099	,-*/
+//
+//		特殊字符  意义
+//		,	 多个值
+//		-	 范围值
+//		*  所有值
+//		?  未说明的值，不关心它的值
+//		/  符号前表示开始时间，符号后表示每次递增的值
+//		L  last, 每月的最后一天、每周的周六、 在星期中6L表示这个月最后一个周五
+//		W  weekday, 15W表示这个月最接近15号的工作日, 只会计算当月的值、LW表示当月最后一个工作日
+//		C  不知道它怎么用
+//		#  6#3表示这个月第3个周五
+			org.quartz.Trigger trigger = org.quartz.TriggerBuilder.newTrigger().withIdentity("simple", "triggerGroup")
+				.withSchedule(org.quartz.CronScheduleBuilder.cronSchedule("10 * * * * ? *")).startNow().build();
+			//把作业和触发器注册到任务调度中
+			scheduler.scheduleJob(job, trigger);
+			//启动调度
+			scheduler.start();
+		} catch (org.quartz.SchedulerException e) {
+			e.printStackTrace();
+		}
+
+log4j.preperties 配置日志的输出级别，默认是DEBUG级
+log4j.logger.org.quartz=INFO	

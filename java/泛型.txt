@@ -1,0 +1,36 @@
+
+1.泛型就是指该对象并不仅仅局限于单个Class
+
+2.语法
+public class Test {
+	public static void main(String[] args) {
+		Demo1<String> demo1 = new Demo1<String>();
+		demo1.test("ok");
+		
+		Demo3 demo3 = new Demo3();
+		demo3.test(new Demo4());
+		demo3.<Demo4>test(new Demo4());//也可以显性的指明泛型的类型
+	}
+}
+//泛型类
+class Demo1<T> {
+	public void test(T x) {
+		System.out.println(x.getClass());
+	}
+}
+//泛型接口
+interface Demo2<T> {
+	void test();
+}
+//仅仅对某个方法使用泛型
+class Demo3 {
+	//同时也可以对泛型进行约束，必须是某个类的以及他的子类或哪些接口的实现类
+	//只能约束一个类，但可以约束多个接口（Java不支持多继承但支持多接口），用 & 连接
+	public <T extends Thread & Runnable> void test(T x) {
+		System.out.println(x.getClass());
+	}
+}
+//测试类
+class Demo4 extends Thread implements Runnable {
+	
+}

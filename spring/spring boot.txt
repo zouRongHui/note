@@ -1,0 +1,8 @@
+
+1. 通过一个标注了 @SpringBootApplication 的配置类来启动项目
+
+2. 默认会自动扫描配置类的同目录和子目录的spring注解，也可以使用 @ComponentScan 去设置具体的扫描包
+
+3. web应用无需像传统的spring项目配置web.xml和application-context.xml
+
+4. 

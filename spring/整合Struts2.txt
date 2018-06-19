@@ -1,0 +1,19 @@
+Demo：springWeb_study 的com.struts2.
+就是将Struts2的action 交由spring 的IOC容器来管理
+spring部分：
+	1. 在配置action 时需要将scope 设置为prototype 多例模式；
+
+Struts配置部分：
+	1.正常的Struts2 配置
+	2.额外加入struts2-spring-plugin.jar 包
+	3.配置 Struts2 的配置文件: action 节点的 class 属性需要指向 IOC 容器中该 bean 的 id
+
+原理：
+通过添加 struts2-spring-plugin.jar 以后, Struts2 会先从 IOC 容器中获取 Action 的实例，
+	无匹配项时才会自己去创建.
+	if (appContext.containsBean(beanName)) {
+		o = appContext.getBean(beanName);
+	} else {
+		Class beanClazz = getClassInstance(beanName);
+		o = buildBean(beanClazz, extraContext);
+	}

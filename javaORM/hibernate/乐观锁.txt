@@ -1,0 +1,35 @@
+
+Hibernate乐观锁，能自动检测多个事务对同一条数据进行的操作，并根据先胜原则，提交第一个事务，其他的事务提交时则抛出org.hibernate.StaleObjectStateException异常。
+	我们可以在异常处理中编写响应错误的代码逻辑
+
+要实现Hibenate乐观锁，我们首先要在数据库表里增加一个版本控制字段，字段名随意，比如就叫version，对应hibernate类型只能为 long,integer,short,timestamp,calendar，也就是只能为数字或timestamp类型。
+	当两个事务同一时间获取到数据A，事务1提交成功后，事务2提交时，由于事务2中版本控制字段的值与数据库中的值不一致(因为事务1提交成功后版本控制字段值会更新)，会抛出org.hibernate.StaleObjectStateException异常
+	
+eg.	
+public class TransferOrder implements Serializable {
+
+	private static final long serialVersionUID = -7718003437391349312L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long orderId;		
+	
+	@Version
+	private int version;
+
+	public Long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+}

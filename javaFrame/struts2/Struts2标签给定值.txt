@@ -1,0 +1,8 @@
+
+
+<s:select list="payTypeList" listKey="typeName" listValue="typeName" cssClass="form-control selectWidth" name="payType" value="%{'现金'}" />
+
+payTypeList中有：支付宝、代收、微信等数据，要给<s:select>设置默认的首位值
+	1.通过request域对象从后台传值。value="payType"(payType值为现金)
+	2.直接在JSP页面设置值。value="%{'现金'}"
+

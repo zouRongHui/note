@@ -1,0 +1,65 @@
+
+1. 当指定的事情发生时触发。
+
+2. 在web应用中提供的基础监听器大体分为三类：
+	ServletContextListener：监控着web容器的创建和销毁；
+		ServletContextAttributeListener：监听者属性的增删改；
+	HttpSessionListener：监听着session的创建和销毁；
+		HttpSessionAttributeListener：监听者属性的增删改；
+	ServletRequestListener：监听着request请求；
+		ServletRequestAttributeListener：监听者属性的增删改；
+
+3.demo
+web.xml
+  <!-- 监听器配置 -->
+  <listener>
+    <listener-class>com.test.listener.Listener0</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.test.listener.Listener1</listener-class>
+  </listener>
+  <listener>
+    <listener-class>com.test.listener.Listener2</listener-class>
+  </listener>
+class:
+	class Listener0 implements ServletContextListener {
+
+		@Override
+		public void contextDestroyed(ServletContextEvent arg0) {
+			System.out.println("容器销毁时触发");
+		}
+
+		@Override
+		public void contextInitialized(ServletContextEvent arg0) {
+			System.out.println("容器创建时触发");
+		}
+		
+	}
+
+	class Listener1 implements HttpSessionListener {
+
+		@Override
+		public void sessionCreated(HttpSessionEvent arg0) {
+			System.out.println("当有新的session创建时触发");
+		}
+
+		@Override
+		public void sessionDestroyed(HttpSessionEvent arg0) {
+			System.out.println("当session销毁时时触发");
+		}
+		
+	}
+
+	class Listener2 implements ServletRequestListener {
+
+		@Override
+		public void requestDestroyed(ServletRequestEvent arg0) {
+			System.out.println("当request请求销毁时触发");
+		}
+
+		@Override
+		public void requestInitialized(ServletRequestEvent arg0) {
+			System.out.println("当有新的request请求时触发");
+		}
+		
+	}

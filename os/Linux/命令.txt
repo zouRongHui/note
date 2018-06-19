@@ -1,0 +1,11 @@
+
+1. 登陆
+
+2. 登出
+    logout
+    
+3. 历史记录
+    history |more #显示命令历史记录(加上more后可以一段一段的显示)
+	history -c #删除，需要在重启后生效
+	history -w #立即生效
+	#设置系统默认的储存数  /etc/profile  HISTSIZE=XX
