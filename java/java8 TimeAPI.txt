@@ -1,0 +1,12 @@
+
+1.日期信息 
+  LocalDate date = LocalDate.now();
+
+2.时间信息
+  LocalTime time = LocalTime.now();
+
+3.日期和时间
+  LocalDateTime datetime = LocalDateTime.now();
+
+4.时区时间
+  ZonedDateTime zonedDatetime = ZonedDateTime.now();
