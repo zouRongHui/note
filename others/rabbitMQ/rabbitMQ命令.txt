@@ -1,0 +1,6 @@
+
+1. 启动
+    service rabbitmq-server start
+
+2. 关闭
+    service rabbitmq-server stop
