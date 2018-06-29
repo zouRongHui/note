@@ -4,3 +4,6 @@
 
 2. 关闭
     service rabbitmq-server stop
+
+3. 服务器状态
+    rabbitmqctl status
