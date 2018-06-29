@@ -1,0 +1,4 @@
+
+1. 当使用SpringMVC框架，controller使用参数  @RequestBody 注解时
+  ①.Headers 设置 Content-Type : application/json
+  ②.@RequestBody注解的参数用 body的raw传递(格式为JSON(application/json))
