@@ -1,0 +1,31 @@
+
+1. 第三方包
+    <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.5.3</version>
+    </dependency>
+    
+2. demo
+//创建一个HTTP客户端
+HttpClient httpClient = HttpClientBuilder.create().build();
+//创建一个具体的请求，示例为post请求
+HttpPost httpPost = new HttpPost(请求URL);
+//设置请求头信息
+httpPost.addHeader("Content-Type", "application/json");
+//设置传递参数
+httpPost.setEntity(HttpEntity);
+//键值对参数
+List<NameValuePair> paramList = new ArrayList<>();
+paramList.add(new BasicNameValuePair("account", "T800"));
+paramList.add(new BasicNameValuePair("passwd", "123456"));
+paramList.add(new BasicNameValuePair("username", "rone"));
+paramList.add(new BasicNameValuePair("sex", "1"));
+httpPost.setEntity(new UrlEncodedFormEntity(paramList, "utf-8"));
+//字符串参数
+httpPost.setEntity(new StringEntity(参数字符串, "utf-8"));
+//发送请求，并获取返回信息
+HttpResponse httpResponse = httpClient.execute(httpPut);
+//打印返回的数据
+System.out.println(EntityUtils.toString(httpResponse.getEntity(), "utf-8"));
+
