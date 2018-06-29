@@ -5,7 +5,11 @@
   3).也划分数据库，以0,1,2...索引号作标识，可用select命令切换
 
 2.命令
-参考：http://doc.redisfans.com
+  1). 远程连接
+    Linux：  redis-cli -h IP地址 -p 端口号
+    Windows：redis-cli.exe -h IP地址 -p 端口号
+  
+  数据库操作命令，可参考：http://doc.redisfans.com
 
 3.Pipeline 管道，用于一次执行多次Redis操作
     
