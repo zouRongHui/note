@@ -1,46 +1,28 @@
 好代码读起来应该像一个故事，而不是像一个字谜
 
-清理缓存
-sudo sysctl -w vm.drop_caches=1
-sudo sysctl -w vm.drop_caches=2
-sudo sysctl -w vm.drop_caches=3
+
 #########
-jdbc 使用示例
-maven pom.xml详解
+整理一下几个Demo
 
 #######
 programming:
 
-*enode
+enode
+springCloud
+springBoot
+myBatis
 
-*spring boot
-spring cloud分布式
-*缓存(Redis)
-消息(RabbitMQ)
-搜索(solr)
-MyBatis
-#jdk1.8
-    #lambda表达式、#函数式接口、#流API、#默认方法、#Time API
+maven
+redis
+rabbitmq
+solr
 
-*jenkins
-
-note整理
-
-*markdown 语法
-    可使用简书的在线编辑器来编辑
-
+Jenkins
 shell
+supervisor
 
 Python
 
-*maven
-
-GitHub上参与一个开源的项目
-
-#############
-电影：
-
-《告白》《可爱骨头》《水果硬糖》
 ###########
 帐号：
 
