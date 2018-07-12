@@ -14,7 +14,7 @@ myBatis
 
 maven
 redis
-rabbitmq
+#rabbitmq
 solr
 
 Jenkins
