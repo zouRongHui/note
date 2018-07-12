@@ -1,0 +1,10 @@
+
+1. ls -l /usr/bin/python*
+    查看本机上已经安装的Python版本
+    
+2. python
+    查看Python默认的版本
+    
+3. 解绑旧的Python2版本
+    sudo rm /usr/bin/python
+    sudo ln -s /usr/bin/python3.5 /usr/bin/python
