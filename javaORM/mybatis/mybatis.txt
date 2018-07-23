@@ -15,9 +15,12 @@
 	@Select("select user_id userId,telephone,email,username from tbl_vw_user where username=#{userName}")
     ViewUser getUser(@Param("userName") String userName);
 	
-3. 查询返回多个字段(不映射为实体类)，使用Map接收返回数据
+3. 查询返回多个字段(不映射为实体类)，使用Map接收返回数据，多个返回数据时用List<Map>接受数据
 	@Select("select telephone,email from tbl_vw_user where username=#{userName}")
     Map getInfo(@Param("userName") String userName);
+	
+	@Select("select name,email from employee where name=#{userName}")
+    List<Map> getUserDataListByName(@Param("userName") String userName);
 	
 4. 
 	
