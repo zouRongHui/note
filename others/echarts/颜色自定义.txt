@@ -1,0 +1,6 @@
+
+option = {
+	...
+    color: ['red', 'orange', 'yellow', 'blue', 'green'],
+	...
+	}

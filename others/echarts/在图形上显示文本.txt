@@ -1,0 +1,52 @@
+
+option = {
+    title: {
+      text: '客户学历分布',
+      x: 'center',
+      top: '5%'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        top: '10%',
+        left: '15%',
+        data:['博士','硕士','本科','大专','高中','中专','初中','小学','其他']
+    },
+    series: [
+        {
+            name:'访问来源',
+            type:'pie',
+            radius: ['40%', '60%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'inner',
+					//自定义显示文本
+                    formatter: function(obj) {
+                        var totalCount = 0;
+                        for (var i = 0; i < option.series[0].data.length; i++) {
+                            totalCount += option.series[0].data[i].value;
+                        }
+                        return obj.name + " " 
+                                + ((Number)(obj.value/totalCount*100)).toFixed(0) + "%";
+                    }
+                }
+            },
+            data:[
+                {value:310000, name:'博士'},
+                {value:210000, name:'硕士'},
+                {value:490000, name:'本科'},
+                {value:438100, name:'大专'},
+                {value:82913, name:'高中'},
+                {value:310000, name:'中专'},
+                {value:490000, name:'初中'},
+                {value:438100, name:'小学'},
+                {value:82913, name:'其他'}
+            ]
+        }
+    ]
+};
