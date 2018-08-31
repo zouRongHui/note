@@ -1,36 +1,54 @@
 好代码读起来应该像一个故事，而不是像一个字谜
 
 
+爬山线路：
+http://blog.sina.com.cn/s/blog_66fc4f220102x1uj.html
 #########
-整理一下几个Demo
-
-#######
 programming:
 
+freemarker 
+Velocity
+
+java
+	List、Map、Set的所有实现类的原理和源码
+	并发包java.concurrent
+	IO包和NIO包
+	JVM：GC、类加载机制、内存
+
+springCloud
+springboot
+mybatis
 lombok 通过简单的注解的形式来帮助我们简化消除一些必须有但显得很臃肿的 Java 代码的工具
 
-enode
-springCloud
-springBoot
-myBatis
+python
 
 maven
 redis
-#rabbitmq
-solr
+rabbitmq
+solr、Lucene
 
-Jenkins
+Jenkins 自动部署发布工具
+supervisor	进程管理工具
 shell
-supervisor
 
-Python
+计算机系统原理；
+网络通信协议（TCP/IP，HTTP等）；
+数据结构与算法；
+#########
+Java编程思想
+大话设计模式
+重构 改善既有代码的设计
+effective java
+深入理解Java虚拟机
+Java并发编程实战
 
-###########
+
+#########
 帐号：
 
 GitHub: zouRongHui 二级
 google: zrh870136444@gmail.com
-###########
+#########
 攒机:
 
 CPU：i5 7500(1399)、i5 7600K(1729)
@@ -42,48 +60,6 @@ CPU：i5 7500(1399)、i5 7600K(1729)
 电源：
 机箱：
 显示屏：
-####
+#########
 压轴网站:
 http://ncase.me/door/#gns!%60mv%60xr
-
-
-################################
-Git仓库：http://test.jishulink.com:8186
-    account:ronghui_zou pwd:zouronghui
-
-
-######################################
-
-
-功能性：消息模块、redis缓存feed流数据、接入网易云信、过往旧数据的批处理
-技能型：
-
-
-
-相关技能
-
-◎ 熟练掌握Java语言；
-◎ 熟悉J2EE开发；
-◎ 熟悉Struts2、Spring、Hibernate框架；
-◎ 熟悉MySQL数据库，能够在开发中使用SQL语句；
-◎ 了解HTML、JS、JQuery等技术；
-◎ 通过CET-4。
-
-项目经验
-
-技术邻后台端口
-项目介绍：理工科知识在线共享平台V5.0版。
-开发环境：Intellij IDEA、Git。
-软件架构：Spring + SpringCloud + SpringBoot + RabbitMQ + Redis + Solr，MySQL。
-责任描述：
-◎ 负责其中消息模块的后台接口；
-◎ BUG的修复；
-◎ swagger2实现自动的接口文档；
-◎ 接入网易云信实现私信聊天；
-◎ 使用Redis缓存feed流中数据；
-◎ 
-◎ 
-◎ 
-◎ 使用git进行版本控制；
-
-
