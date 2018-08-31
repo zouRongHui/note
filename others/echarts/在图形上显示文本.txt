@@ -34,6 +34,8 @@ option = {
                         return obj.name + " " 
                                 + ((Number)(obj.value/totalCount*100)).toFixed(0) + "%";
                     }
+					//也可使用其自带的字符串模板, {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+					//formatter: '{b} {d}%
                 }
             },
             data:[
