@@ -1,0 +1,8 @@
+
+1. 增加一个属性
+$('#idName').attr("name", "rone");
+$('#idName').attr("disabled", "disabled");
+
+2. 移除一个属性
+$('#idName').removeAttr("disabled");
+$('#idName').removeAttr("name");
