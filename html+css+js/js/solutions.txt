@@ -16,6 +16,10 @@
 3. 数值对象 保留小数
     数值对象.toFixed(num)
 
-4.
+4. 判断是否为空
+    str == '' || str == undefined || str == null
 
-5.
+5. 创建数组
+    eg.
+    var childs = [];//一个数组
+    childs.push("hello");//往数组中添加一个值

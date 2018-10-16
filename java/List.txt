@@ -8,13 +8,13 @@
 	List = new ArrayList(Set);
 	Set = new HashSet(List);
 	
-5.List<String> 转 String[]
+5.List<String>、String[]互转
 	eg.
 	List<String> list = new ArrayList<String>();  
 	list.add("str1");  
-	list.add("str2");  
-	int size = list.size();  
-	String[] arr = (String[])list.toArray(new String[size]);
+	list.add("str2");    
+	String[] arr = (String[])list.toArray(new String[list.size()]);
+    list = Arrays.asList(arr);
 	
 6.无内容的List的一些方法的返回值
 	List<String> strs = new ArrayList<String>();

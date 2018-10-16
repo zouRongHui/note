@@ -1,0 +1,30 @@
+
+option = {
+    title: {
+        text: '世界人口总量',
+        subtext: '数据来自网络'
+    },
+    yAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+    },
+    xAxis: {
+        type: 'category',
+        data: ['巴西共和国','印度尼西亚共和国','美国共和国','印度共和国','中华人民共和国','世界人口(万)'],
+        axisLabel: {
+            //设置文本旋转角度 -90~90
+            // rotate: -30
+            //自定义文本格式
+            formatter: function(value) {
+                return value.split("").join("\n");
+            }
+        }
+    },
+    series: [
+        {
+            name: '2011年',
+            type: 'bar',
+            data: [18203, 23489, 29034, 104970, 131744, 630230]
+        }
+    ]
+};

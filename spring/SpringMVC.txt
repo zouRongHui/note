@@ -215,7 +215,18 @@
 
 	}
 	
-	
+3.solutions
+1). springmvc接收date类型参数
+    ①.在需要由string转Date的字段上加上DateTimeFormat注解，代码如下：
+        @DateTimeFormat(pattern="yyyy-MM-dd")
+        private Date actionDate;
+    ②.在控制器中加入如下代码：
+        @InitBinder
+        public void initBinder(ServletRequestDataBinder bin){
+                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                 CustomDateEditor cust = new CustomDateEditor(dsf,true);
+                 bin.registerCustomEditor(Date.class,cust);
+        }
 	
 	
 	

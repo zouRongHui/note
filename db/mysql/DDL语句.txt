@@ -27,3 +27,8 @@
 	alter table 表名 add index 索引名(索引字段,...)
 	create index 索引名 on 表名(索引字段,...)
 	
+6. 查看表的建表语句
+    show create table + 表名
+    
+7. 查看表结构
+    desc 表名

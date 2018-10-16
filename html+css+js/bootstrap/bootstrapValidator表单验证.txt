@@ -194,6 +194,14 @@ $("#form-test").bootstrapValidator({
                     min: 2,
                     max: 4,
                     message: '必须选择2-4个选项'
+                },
+                //自定义验证规则
+                callback: {
+                    message: '',
+                    //value：当前组件的value值，validator：当前validator
+                    callback: function(value, validator) {
+                        return true;
+                    }
                 }
             }
         }

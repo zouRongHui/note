@@ -22,3 +22,8 @@
         order by field(type,2,3,1)就是按2在前，3次之，1最后的顺序来排。
         
 5. 创建table时要避免所使用的数据库的关键字和保留字
+
+6. 清空表数据
+    删除表：    drop table 表名称                         eg: drop table  dbo.Sys_Test
+    清空表数据：truncate table 表名称                     eg: truncate  table dbo.Sys_Test                  
+    删除表数据：delete from 表名称 where 列名称 = 值      eg: delete from dbo.Sys_Test where test='test'

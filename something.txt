@@ -1,6 +1,25 @@
 好代码读起来应该像一个故事，而不是像一个字谜
 
+spring ioc注解方式的init和destory方法
 
+spring jdbcTemplate的占位符list情况
+
+spring 的schedulingConfigurer
+
+layer
+
+itext生成PDF文件
+
+将文件已流的形式返回前端
+    
+###############
+1. 层级任务明确，那一层做哪些事？
+2. 接口返回json格式时进行 封装。结构包括状态标志、状态值、数据
+3. 编写注释
+    1). interface写注释 or 实现类写注释
+    2). 返回值的注释写在哪？interface还是实现类
+4. 集合类，尽量初始化容量
+###############
 爬山线路：
 http://blog.sina.com.cn/s/blog_66fc4f220102x1uj.html
 #########

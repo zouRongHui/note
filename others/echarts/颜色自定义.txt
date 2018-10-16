@@ -1,6 +1,10 @@
 
+1. 整体颜色系自定义
 option = {
 	...
     color: ['red', 'orange', 'yellow', 'blue', 'green'],
 	...
 	}
+    
+2. 单个数据颜色指定
+option.series[].data[].itemStyle={color: '#996600'}
