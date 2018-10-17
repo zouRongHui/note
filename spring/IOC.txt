@@ -56,7 +56,7 @@ Beans.xml
 				singleton:在该容器中只会有一个实例,
 				prototype:在该容器中没调用一次产生一个新的实例;
 			init-method:指定初始化方法，在实例化时就会初始化;
-			destory-method:指定销毁方法;
+			destroy-method:指定销毁方法;
 				Bean的生命周期：
 					1. 通过构造器或工厂方法创建 Bean 实例
 					2. 为 Bean 的属性设置值和对其他 Bean 的引用
@@ -360,6 +360,9 @@ data.properties
 					使用在Arrays 和List上时自动装配所有兼容的Bean，
 					使用在Map上时，key=Bean名称，value=Bean；
 				 @Resource: 注解要求提供一个 Bean 名称的属性，若该属性为空，则自动采用标注处的变量或方法名作为 Bean 的名称；
+            4.tip
+                @PostConstruct 指定初始化方法，在实例化时就会初始化;
+                @PreDestroy 指定销毁方法;
 		 -->
 		<context:component-scan base-package="com.ioc.annotations" />
 
@@ -374,6 +377,19 @@ data.properties
 
 		@Component("employee")
 		class Employee {
+
+            //指定初始化方法，在实例化时就会初始化;
+            @PostConstruct
+            private void init() {
+                System.out.println(Employee.class + " init.....");
+            }
+
+            //指定销毁方法;
+            @PreDestroy
+            private void destroy() {
+                System.out.println(Employee.class + " destroy...........");
+            }
+            
 			public void show() {System.out.println("Employee show..");}
 		}
 

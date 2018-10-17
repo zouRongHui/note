@@ -1,0 +1,23 @@
+
+    /**
+	 * 下载文件
+	 * @param response	相应报文
+	 */
+	@RequestMapping("/downloadFile")
+	public void downloadFile(HttpServletResponse response) throws Exception {
+
+		response.reset();
+		response.setContentType("application/txt;charset=utf-8");
+		response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode("下载" + ".txt", "UTF-8"));
+		File file = new File("E:\\fap二次开发.txt");
+		InputStream inputStream = new FileInputStream(file);
+		OutputStream outputStream = response.getOutputStream();
+		byte[] b = new byte[100];
+		while (inputStream.read(b) != -1) {
+			System.out.println(new String(b, "utf-8"));
+			outputStream.write(b);
+		}
+		inputStream.close();
+		outputStream.flush();
+		outputStream.close();
+	}

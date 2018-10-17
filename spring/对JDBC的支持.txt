@@ -1,5 +1,9 @@
 Demo：Spring_study的com.jdbc.
 spring对JDBC做了进一步的集成
+
+tip:
+1. 当sql的where中有in时，?占位符无效，需要使用具名参数
+
 Demo：
 	引入相关的数据源包，例c3p0
 	c3p0-0.9.1.2.jar
@@ -63,6 +67,7 @@ class：
 		
 		//NamedParameterJdbcTemplate 可使用具名参数，便于代码维护
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate = context.getBean(NamedParameterJdbcTemplate.class);
+		//namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);//也可以这样来获取具名参数模板
 		sql = "UPDATE employee SET name = :name WHERE id = :id";
 		Map<String, Object> paramMap = new HashMap<>(2);
 		paramMap.put("name", "King");

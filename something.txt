@@ -1,16 +1,6 @@
 好代码读起来应该像一个故事，而不是像一个字谜
 
-spring ioc注解方式的init和destory方法
-
-spring jdbcTemplate的占位符list情况
-
-spring 的schedulingConfigurer
-
 layer
-
-itext生成PDF文件
-
-将文件已流的形式返回前端
     
 ###############
 1. 层级任务明确，那一层做哪些事？
