@@ -57,3 +57,7 @@ $.ajax({
         }
     }
 });
+
+
+tips:
+    1. 当参数需要传数组时，需要设置 traditional: true
