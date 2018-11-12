@@ -1,0 +1,13 @@
+
+1.
+    ResourceBundle resourceBundle = ResourceBundle.getBundle("application");//默认从根路径下开始查找配置文件
+    String str = resourceBundle.getString("clear.cron");
+    
+2.
+    Properties properties = new Properties();
+    InputStream inputStream;
+    inputStream = 当前类.class.getResourceAsStream("/application.properties");//默认当前路径
+    inputStream = new FileInputStream(new File("E:\\application.properties"));//绝对路径
+    inputStream = ClassLoader.getSystemResourceAsStream("application.properties");//默认从跟路径下查找
+    properties.load(inputStream);
+    String str = properties.get("clear.cron");
