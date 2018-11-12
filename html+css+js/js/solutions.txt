@@ -1,7 +1,7 @@
 
 1. 定时执行
-    setTimeout("test()", 1000);//1000毫秒后执行一次test()方法，只运行一次
-    setInterval("test()", 2000);//每隔2000毫秒执行一次test()方法，运行多次
+    setTimeout("test", 1000);//1000毫秒后执行一次test()方法，只运行一次
+    setInterval("test", 2000);//每隔2000毫秒执行一次test()方法，运行多次
     
 2. 转跳
     window.open(URL,name);
@@ -23,3 +23,28 @@
     eg.
     var childs = [];//一个数组
     childs.push("hello");//往数组中添加一个值
+    var index = childs.indexOf("hello");//查找某个元素在数组中索引0开始
+    var remove = childs.splice(index, count);//移除从index索引开始的count个元素并返回
+    
+6. 实现模块可拖动
+    纯js实现：
+    //id为需要拖动的d元素的的id
+    function dragFunc(id) {
+        var Drag = document.getElementById(id);
+        Drag.onmousedown = function(event) {
+            var ev = event || window.event;
+            event.stopPropagation();
+            var disX = ev.clientX - Drag.offsetLeft;
+            var disY = ev.clientY - Drag.offsetTop;
+            document.onmousemove = function(event) {
+                var ev = event || window.event;
+                Drag.style.left = ev.clientX - disX + "px";
+                Drag.style.top = ev.clientY - disY + "px";
+                Drag.style.cursor = "move";
+            };
+        };
+        Drag.onmouseup = function() {
+            document.onmousemove = null;
+            this.style.cursor = "default";
+        };
+    };
