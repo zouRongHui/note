@@ -1,6 +1,6 @@
 好代码读起来应该像一个故事，而不是像一个字谜
 
-layer
+spring namedparameterjdbctemplate 使用delete not in 时具名占位符bug
     
 ###############
 1. 层级任务明确，那一层做哪些事？
@@ -15,6 +15,7 @@ http://blog.sina.com.cn/s/blog_66fc4f220102x1uj.html
 #########
 programming:
 
+logback
 freemarker 
 Velocity
 
