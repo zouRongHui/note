@@ -1,0 +1,70 @@
+
+1. 基于springboot无需添加别的jar包
+
+2. 实现
+2.1 可以自定义一个线程池的配置类、省略的话将使用默认的线程池配置
+    /**
+     * spring线程池的初始化配置
+     * create by rone
+     * 2018.11.13
+     */
+    @Component
+    @EnableAsync
+    public class ThreadAsyncConfigurer implements AsyncConfigurer {
+        @Override
+        public Executor getAsyncExecutor() {
+            ThreadPoolTaskExecutor threadPool = new ThreadPoolTaskExecutor();
+            //设置核心线程数
+            threadPool.setCorePoolSize(10);
+            //设置最大线程数
+            threadPool.setMaxPoolSize(100);
+            //线程池所使用的缓冲队列
+            threadPool.setQueueCapacity(10);
+            //等待任务在关机时完成--表明等待所有线程执行完
+            threadPool.setWaitForTasksToCompleteOnShutdown(true);
+            // 等待时间 （默认为0，此时立即停止），并没等待xx秒后强制停止
+            threadPool.setAwaitTerminationSeconds(60);
+            //  线程名称前缀
+            threadPool.setThreadNamePrefix("MyAsync-");
+            // 初始化线程
+            threadPool.initialize();
+            return threadPool;
+        }
+    }
+
+2.2 编写异步方法
+    @Component
+    public class AsyncTest {
+
+        /**
+         * 有@Async注解的方法，默认就是异步执行的，会在默认的线程池中执行，但是此方法不能在本类调用；
+         * 调用类需添加@EnableAsync
+         */
+        @Async
+        public void test() {
+            System.out.println("子线程名称：" + Thread.currentThread().getName() + "----------");
+            try {
+                Thread.sleep(1000 * 10);
+                System.out.println("子线程over.....");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+2.3 调用
+    @Controller
+    @RequestMapping("/test")
+    @EnableAsync
+    public class TestController {
+        @Autowired
+        private AsyncTest asyncTest;
+
+        @RequestMapping(value = "/asyncTest")
+        public Result<?> testAsync() {
+            asyncTest.test();
+            return Result.success();
+        }
+    }
+
+2.4 tip：有些教程说需要在启动类上加上 @EnableAsync 注解，但个人实测不加上该注解也有效
