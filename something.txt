@@ -1,6 +1,7 @@
 好代码读起来应该像一个故事，而不是像一个字谜
 
 spring namedparameterjdbctemplate 使用delete not in 时具名占位符bug
+hibernate hql 的delete语句的 not in 使用
     
 ###############
 1. 层级任务明确，那一层做哪些事？
@@ -8,6 +9,7 @@ spring namedparameterjdbctemplate 使用delete not in 时具名占位符bug
 3. 编写注释
     1). interface写注释 or 实现类写注释
     2). 返回值的注释写在哪？interface还是实现类
+    3). 新增的方法、类写上作者
 4. 集合类，尽量初始化容量
 ###############
 爬山线路：
