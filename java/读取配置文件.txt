@@ -1,4 +1,4 @@
-
+0. java中properties配置文件默认的编码为：ISO-8859-1，是不支持中文的，中文需要转码
 1.
     ResourceBundle resourceBundle = ResourceBundle.getBundle("application");//默认从根路径下开始查找配置文件
     String str = resourceBundle.getString("clear.cron");

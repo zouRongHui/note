@@ -3,7 +3,10 @@
 TODO：
 spring namedparameterjdbctemplate 使用delete not in 时具名占位符bug
 hibernate hql 的delete语句的 not in 使用
+hibernate 联合主键以及联合组建下的自关联操作
 
+activit流程管理组件
+dubbo
 freemarker
 Velocity
 

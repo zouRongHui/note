@@ -67,3 +67,17 @@
     $(element).children().each(function (index, child) {});
     获取第几个，index从0计数
     $(element).children().eq(0);//获取第一个
+	
+13. 通过class选择器选择元素并遍历
+	$(".select_firstLevel").each(function (index, firstLevelSelector) {
+		for (var j = 0; j < firstLevel.length; j++) {
+			$(firstLevelSelector).append("<option value='" + firstLevel[j].levelNo + "'>" + firstLevel[j].levelName + "</option>");
+		}
+		$(firstLevelSelector).change();
+	})
+	
+14. 获取表单的全部参数
+		//param1=value1&param2=value2&....
+        console.log($("#form-add").serialize());
+		//json格式数组
+        console.log($("#form-add").serializeArray());

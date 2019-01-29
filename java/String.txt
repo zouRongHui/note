@@ -58,4 +58,8 @@
 		
 10. String.equalsIgnoreCase(String);//忽略大小写的比较大小
 
+11. String解码后重新编码，用于解决中文乱码问题
+	new String((bankName.toString() + "客户分析报告.pdf").getBytes("UTF-8"), "ISO-8859-1");
+	new String(resourceBundle.getString("bank.name").getBytes("ISO-8859-1"), "UTF8")
+
 
