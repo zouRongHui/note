@@ -19,4 +19,8 @@
   6). LOCATE(substr,str,pos), 返回在pos位置之后首次出现substr相对于str的位置
   7). FIELD(str,str1,str2,str3,...): 返回str在后面的str列表中第一次出现的位置，
     若找不到str或者str为NULL, 则返回0。常用来实现自定义排序
-  8). 
+  8).
+
+3. 数值
+    1).CEIL(X)/CEILING(X): 向上取整, SELECT CEILING(2.01);//3, SELECT CEIL(-2.01);//-2
+    2).RAND():返回一个[0, 1)
