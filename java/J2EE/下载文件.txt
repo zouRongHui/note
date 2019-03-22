@@ -1,4 +1,5 @@
 
+0.
     /**
 	 * 下载文件
 	 * @param response	相应报文
@@ -21,3 +22,15 @@
 		outputStream.flush();
 		outputStream.close();
 	}
+
+1.针对ie、edge、chrome、firefox的文件名中文乱码处理
+    code：
+        String fileName = bankName.toString() + "客户分析报告.pdf";
+        String userAgent = request.getHeader("User-Agent").toUpperCase();
+        if (userAgent.contains("MSIE") || userAgent.contains("TRIDENT") || userAgent.contains("EDGE")) {
+            //ie、edge浏览器编码
+            fileName = URLEncoder.encode(fileName, "UTF-8");
+        } else {
+            //其他浏览器编码，实测chrome、Firefox没毛病
+            fileName = (new String(fileName.getBytes("UTF-8"), "ISO-8859-1"));
+        }
