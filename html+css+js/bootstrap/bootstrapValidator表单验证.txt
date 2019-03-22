@@ -160,7 +160,7 @@ $("#form-test").bootstrapValidator({
                 * {"valid",true}  验证通过
                 * {"valid",false} 验证失败，显示提示语
                 */
-                remote: {//ajax验证。server result:{"valid",true or false} 向服务发送当前input name值，获得一个json数据。例表示正确：{"valid",true}  
+                remote: {//ajax验证。server result:{"valid"：true or false} 向服务发送当前input name值，获得一个json数据。例表示正确：{"valid"：true}  
                      url: 'exist2.do',//验证地址
                      message: '用户已存在',//提示消息
                      delay :  2000,//每输入一个字符，就发ajax请求，服务器压力还是太大，设置2秒发送一次ajax（默认输入一个字符，提交一次，服务器压力太大）
@@ -226,30 +226,51 @@ HTML:
 </form>
 
 JS:
-    $("#form-add").bootstrapValidator({
+    $(".form_groupInfo").bootstrapValidator({
         feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
+            valid: "glyphicon glyphicon-ok",
+            invalid: "glyphicon glyphicon-remove",
+            validating: "glyphicon glyphicon-refresh"
         },
-        fileds: {
+        fields: {
             groupName: {
                 validators: {
                     notEmpty: {
                         message: '请输入客群名'
                     },
                     remote: {
-                        url: '/groupinfo/checkGroupName',
+                        url: contextPath+'/groupinfo/checkgroupname.json',
                         message: '客群名已存在',
                         delay: 1500,
-                        type: 'GET'
+                        type: 'GET',
+                        data: function(validator) {
+                            return {
+                                groupName : $("#txt_groupName").val(),
+                                groupId : $("#hid_groupId").val()
+                            };
+                        }
                     }
                 }
-            }
+            },
             runCycle: {
                 validators: {
                     notEmpty: {
-                        message: '请输入客群名'
+                        message: '请选择执行周期'
+                    },
+                    //自定义的验证规则
+                    callback: {
+                        message: '客群的执行频率不能低于规则的最高运行频率',
+                        callback: function(runCycle, validator) {
+                            var maxCycle = 100;
+                            var labelSelects = $(".sel_label");
+                            for (var i = 0; i < labelSelects.length; i++) {
+                                var labelRunCycle = $(labelSelects[i]).find("option:selected").attr("runFreq");
+                                if (labelRunCycle < maxCycle) {
+                                    maxCycle = labelRunCycle;
+                                }
+                            }
+                            return !(maxCycle < runCycle);
+                        }
                     }
                 }
             }

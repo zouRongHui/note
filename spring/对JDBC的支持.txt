@@ -80,6 +80,11 @@ class：
 		SqlParameterSource paramSource = new BeanPropertySqlParameterSource(newEmployee);
 		namedParameterJdbcTemplate.update(sql, paramSource);
 		
+		//未验证
+		//获取的数据直接映射到pojo中
+		sql = "select id,name,email from employee";
+		Employee newEmployee = jdbcTemplate.query(sql, new BeanPropertyRowMapper(Employee.class));
+		
 		((AbstractApplicationContext)context).close();
 	}
 	

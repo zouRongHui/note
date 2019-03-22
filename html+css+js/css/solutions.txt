@@ -21,9 +21,13 @@
     transform: translate(-50%,-50%);
     
 5. 设置滚动条
-    overflow: scroll;//横向和纵向的滚动条都有
-    overflow-x: scroll;//横向滚动条
-    ocerflow-y: scroll;//纵向滚动条
+	强制设置出现滚动条
+		overflow: scroll;//横向和纵向的滚动条都有
+		overflow-x: scroll;//横向滚动条
+		overflow-y: scroll;//纵向滚动条
+	自动出现滚动条，当字内容超出高度限制时自动出现
+		overflo: auto;
+	禁用：overflow:hidden;
     
 6. <a>标签去掉下划线
     text-decoration: none;

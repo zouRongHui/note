@@ -1,0 +1,6 @@
+
+1. 格式化数字类型数据
+	//小数部分需要用00来表示
+	DecimalFormat decimalFormat = new DecimalFormat("###,###.00");
+	System.out.println(decimalFormat.format(Double.parseDouble("2400.515860")));//2,400.52
+	System.out.println(decimalFormat.format(Double.parseDouble("2400")));//2,400.00

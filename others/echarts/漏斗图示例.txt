@@ -1,0 +1,47 @@
+option = {
+    title: {
+        text: '漏斗图',
+    },
+    tooltip: {
+        formatter: "{a} <br/>{b} : {c}"//高亮时展示的悬浮框内容
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    legend: {
+        data: ['成功','无意向','有意向','接触','总数']
+    },
+    series: [
+        {
+            name:'漏斗图',//item展示内容
+            type:'funnel',//漏斗图
+            min: 0,
+            max: 100,//要改
+            minSize: '0%',//default
+            maxSize: '100%',//default
+            sort: 'descending',//default，数据从小到大展示
+            gap: 0,//间距
+            label: {
+                show: true,
+                position: 'inside'//默认文本的展示位置
+            },
+            itemStyle: {
+                borderColor: '#fff'//边框
+            },
+            emphasis: {
+                label: {
+                    fontSize: 30//高亮时文本大小
+                }
+            },
+            data: [
+                {value: 40, name: '成功'},
+                {value: 60, name: '无意向'},
+                {value: 20, name: '有意向'},
+                {value: 30, name: '接触'},
+                {value: 100, name: '总数'}
+            ]
+        }
+    ]
+};

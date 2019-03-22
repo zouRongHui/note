@@ -17,6 +17,9 @@
     
 切换分支
     git checkout 分支名
+	
+将目标分支合并到当前分支
+	git merge --no-ff 分支名
 
 版本回退
     git reset --hard 版本号(可省略至前几位)

@@ -43,4 +43,4 @@
 		  System.out.println("Key = " + key + ", Value = " + value);
 		}
 		
-3.
+3. new HashedMap(number);//number要大于0，不然会报错

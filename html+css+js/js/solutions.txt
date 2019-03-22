@@ -48,3 +48,8 @@
             this.style.cursor = "default";
         };
     };
+	
+7. ×Ö·ûÌæ»»
+	µ¥¸öÌæ»»£º"yyyy-MM-dd-hh-mm-ss".replace("-","/")	=>	"yyyy/MM-dd-hh-mm-ss"
+	È«²¿Ìæ»»£º"yyyy-MM-dd-hh-mm-ss".replace(/-/g,"/")	=>	"yyyy/MM/dd/hh/mm/ss"
+	

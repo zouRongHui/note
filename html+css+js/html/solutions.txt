@@ -25,3 +25,6 @@
           var option = $("<option>").val(1).text("pxx");
           $(".selector2").append(option);
         });
+		
+4). 文本框设置不记忆以往的输入记录
+	<input type="text" name="planName" class="form-control" value="${(result.planName)!}" autocomplete="off">
