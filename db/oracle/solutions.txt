@@ -1,4 +1,0 @@
-
-1. Oracle中空字符串自动转为null，故sql语句中 attr != '' 是没有匹配结果的
-
-2. SELECT CUST_ID AS `name` FROM JS_TMP;//Oracle中不支持``，需要改为 SELECT CUST_ID AS name FROM JS_TMP;
