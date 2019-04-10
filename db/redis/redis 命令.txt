@@ -1,0 +1,3 @@
+0. 参考：http://doc.redisfans.com
+
+1. KEYS pattern 查找所有符合给定模式 pattern 的 key
