@@ -22,3 +22,6 @@
 2. ie目前(2019.4.15)不支持<datalist>
 
 3. ie好像不支持jQuery的$("#ipt_runCycle").attr("value", data.result[i].dicVal);
+
+4. ie下url中文乱码，可通过js的encodeURI()方法进行编码
+	demo：$('.subbranch').attr("href","${rc.contextPath}/marketingcampaign/subbranchmonitoring?branchName="+encodeURI(branchName)+"&campaignId="+encodeURI(campaignId) + "&campaignWay=" + campaignWay);
