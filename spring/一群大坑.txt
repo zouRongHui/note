@@ -1,2 +1,9 @@
 
 1. springboot 的请求直接返回string时，string的中文可能会乱码
+
+2. 在Linux系统中，springboot应用服务在启动（java -jar 命令启动服务）的时候，
+	默认会在操作系统的/tmp目录下生成一个tomcat*的文件目录，上传/下载的文件先要转换成临时文件保存在这个文件夹下面。
+	由于临时/tmp目录下的文件，在长时间没有使用的情况下，就会被Linux系统机制自动删除掉，导致下载文件时系统找不到文件路径导致IO异常。
+	所以如果系统长时间无人问津的话，就可能导致上面这个问题。
+	解决方案：
+	https://blog.csdn.net/husong_/article/details/83016313
