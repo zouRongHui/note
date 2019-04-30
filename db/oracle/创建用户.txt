@@ -1,0 +1,14 @@
+
+//Linux切换到Oracle用户
+su - oracle
+//登录但不连接到数据库
+sqlplus /nolog
+//操作系统验证登录
+conn / as sysdba
+//创建用户
+create user 用户名 identified by 密码;
+//给用户授权
+grant connect,resource to 用户名;
+//删除用户，cascade 级联
+drop user 用户名 cascade;
+
