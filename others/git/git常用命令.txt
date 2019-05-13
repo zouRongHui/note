@@ -50,7 +50,8 @@
 特别帅的查看版本信息
     git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     
-    
+撤销merging状态
+$ git reset --hard HEAD    
     
     
     
