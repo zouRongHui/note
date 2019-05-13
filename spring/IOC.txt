@@ -44,6 +44,7 @@ Beans.xml
 			id:用来标识该bean;
 			name:;
 			class:bean全类名;
+			primary:首要的、首选，默认为false。当容器中有多个相同类型的bean时会有限使用primary为true的bean，但是当有多个primary为true的bean时会出错
 			lazy-init:延迟加载，default(默认值):使用全局的默认方案、
 				flase:在容器实例化时就实例化该bean，
 				true:延迟加载即获取该bean实例时才实例化;
