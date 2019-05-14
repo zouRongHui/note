@@ -60,7 +60,7 @@
     
 11. 获取指定属性值
     $(selecter).prop(属性名);
-    $(".test").prop("outerHTML");
+    $(".test").prop("outerHTML");//该方法可用于jQuery的元素对象(div)重复添加至页面中时使用
     
 12. 获取子元素并遍历、获取第几个子元素
     遍历：
