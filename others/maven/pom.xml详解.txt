@@ -1,3 +1,5 @@
+<!-- https://www.cnblogs.com/qq78292959/p/3711501.html -->
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,7 +12,7 @@
     <groupId>org.rone.study</groupId>
     <!--构件的标识符，它和group ID一起唯一标识一个构件-->
     <artifactId>Java</artifactId>
-    <!--项目当前版本，格式为:主版本.次版本.增量版本-限定版本号-->
+    <!--项目当前版本，格式为:主版本.次版本.增量版本-限定版本号(主要有：snapshot快照版本(简化版本)、alpha内测版、beta公测版、release稳定版、GA正式发布版)-->
     <version>1.0-SNAPSHOT</version>
     <!--打包类型，默认是jar，可以配置成war、zip、pom类型。-->
     <packaging>jar</packaging>
@@ -72,8 +74,27 @@
             <groupId>redis.clients</groupId>
             <!--构件的标识符-->
             <artifactId>jedis</artifactId>
-            <!--版本-->
+            <!--可选项：版本，该属性缺失时会使用仓库中最新的版本-->
             <version>2.9.0</version>
+			<!--可选项：依赖范围。有六个可选值：（https://blog.csdn.net/seasonsbin/article/details/79093647）
+				compile（编译范围）（默认依赖范围）对于编译、测试、运行三种classpath都可用，例如项目中有spring-core的依赖，那么spring-core不管是在编译，测试，还是运行都会被用到，因此spring-core必须是编译范围。
+				provided（已提供范围）由容器来提供jar包，典型的例子就是servlet-api， 编译和测试该项目的时候需要该依赖，但是在运行时，web容器已经提供的该依赖，所以运行时就不再需要此依赖。
+				runtime（运行时范围）只对测试和运行两种classpath可用，对编译无效。典型例子就是JDBC的驱动实现，项目主代码编译的时候只需要JDK提供的JDBC接口，只有在测试和运行的时候才需要实现上述接口的具体JDBC驱动。
+				test（测试范围）只对测试classpath有效，最典型的例子就是 Junit, 构件在测试时才需要，所以它的依赖范围是测试。
+				system（系统范围）与provided类似，但是你必须显式的提供一个对于本地系统中JAR文件的路径。
+					必须同时提供一个systemPath元素，提供本地引用的jar包路径。
+				import（导入依赖范围）该依赖范围不会对三种classpath产生影响，该依赖范围只能与dependencyManagement元素配合使用。
+			-->
+			<!--<scope>一个范围</scope>-->
+			<!--可选项：排除依赖传递：即：当前项目依赖当前配置的依赖包A时，如果这个依赖包又依赖其他包B，这里可以选择排除依赖的传递性，不下载导入B-->
+			<!--<exclusions>-->
+				<!--<exclusion>-->
+					<!--被排除的依赖包坐标-->
+					<!--<groupId></groupId>-->
+					<!--<artifactId></artifactId>-->
+					<!--<version></version>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
         </dependency>
 
         <dependency>
