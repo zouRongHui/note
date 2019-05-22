@@ -47,3 +47,8 @@
 	  `MARKETING_DATA` timestamp NULL DEFAULT NULL COMMENT '营销时间',
 	  PRIMARY KEY (`TASK_ID`)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='营销活动任务';
+	
+6. 单引号转义
+	INSERT INTO "CBPMS_PRODUCT" VALUES ('PRO_NAME', '='市民贷'');//该语句会报错
+	需要改为：INSERT INTO "CBPMS_PRODUCT" VALUES ('PRO_NAME', '=''市民贷''');
+	
