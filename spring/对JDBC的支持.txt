@@ -87,4 +87,45 @@ class：
 		
 		((AbstractApplicationContext)context).close();
 	}
+
 	
+2.坑
+	1). 在下列方法中 elementType 仅支持基础的数据类型，例如String、Integer、Long等
+		queryForList(String sql, Map<String, ?> paramMap, Class<T> elementType);
+		queryForList(String sql, Class<T> elementType, Object... args)；
+		报错信息：org.springframework.jdbc.IncorrectResultSetColumnCountException: Incorrect column count: expected 1, actual 8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
