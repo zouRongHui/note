@@ -81,4 +81,30 @@
             tips: [3, '#d827a4'] //还可配置颜色
         });
     }
+    //捕获页
+    function button9() {
+        layer.open({
+            type: 1,
+            shade: false,
+            title: false, //不显示标题
+            content: $('#div_show'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function(){
+                layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', {time: 1000, icon:6});
+            }
+        });
+    }
+    //子页面
+    function button10() {
+        layer.open({
+            type: 2,
+            title: '标题',
+            area:['600px','300px'],
+            fixed: false,//是否固定
+            maxmin: true,
+            content: 'url',//子页面url
+            end: function () {
+                //页面关闭后的操作
+            }
+        });
+    }
 
