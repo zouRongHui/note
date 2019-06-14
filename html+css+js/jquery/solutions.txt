@@ -81,3 +81,7 @@
         console.log($("#form-add").serialize());
 		//json格式数组
         console.log($("#form-add").serializeArray());
+		
+15. 查看某元素在数组中的位置
+	var arry = [ "C#", "html", "css", "JavaScript" ]; 
+	var result= $.inArray("C#", arry);  //如果arry数组里面存在"C#" 这个字符串则返回该字符串的数组下标，否则返回(不包含在数组中) -1
