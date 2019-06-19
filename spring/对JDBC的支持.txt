@@ -94,6 +94,18 @@ class：
 		queryForList(String sql, Map<String, ?> paramMap, Class<T> elementType);
 		queryForList(String sql, Class<T> elementType, Object... args)；
 		报错信息：org.springframework.jdbc.IncorrectResultSetColumnCountException: Incorrect column count: expected 1, actual 8
+		
+	2). in 的使用
+		//在spring jdbcTemplate中使用in时，需要使用NamedParameterJdbcTemplate具名的参数来查询
+		sql = "select * from employee where id in (:ids)";
+		List<Integer> ids = new ArrayList<>(3);
+		ids.add(1);
+		ids.add(2);
+		ids.add(3);
+		Map<String, Object> paramMap = new HashMap<>(1);
+		paramMap.put("ids", ids);
+		List<Employee> employeeList = namedParameterJdbcTemplate.query(sql, paramMap, new BeanPropertyRowMapper<>(Employee.class));
+		employeeList.forEach(e -> System.out.println(e));
 
 
 
