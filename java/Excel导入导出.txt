@@ -71,6 +71,7 @@ public Object getCellValue(Cell cell) {
 			if (DateUtil.isCellDateFormatted(cell)) {
 				return cell.getDateCellValue();		//Date
 			} else {
+				//若数值过大会有精度损失，可使用 NumberToTextConverter.toText(cell.getNumericCellValue()) 获取未有精度损失的字符类型数据
 				return cell.getNumericCellValue();	//Double
 			}
 		case Cell.CELL_TYPE_BOOLEAN:	//布尔型
