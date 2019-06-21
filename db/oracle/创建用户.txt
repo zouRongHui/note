@@ -12,4 +12,6 @@ grant connect,resource to 用户名;
 grant sysdba to 用户名;
 //删除用户，cascade 级联
 drop user 用户名 cascade;
+//解锁用户
+alter user cbpms account unlock;
 
