@@ -85,3 +85,6 @@
 15. 查看某元素在数组中的位置
 	var arry = [ "C#", "html", "css", "JavaScript" ]; 
 	var result= $.inArray("C#", arry);  //如果arry数组里面存在"C#" 这个字符串则返回该字符串的数组下标，否则返回(不包含在数组中) -1
+
+16. $selector.off(option);移除当前元素的option事件
+    $("p").off("click");//移除所有 <p> 元素上的 click 事件
