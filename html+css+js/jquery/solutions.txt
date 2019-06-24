@@ -58,9 +58,14 @@
 10. 移除当前元素
     remove() - 删除被选元素（及其子元素）
     
-11. 获取指定属性值
-    $(selecter).prop(属性名);
-    $(".test").prop("outerHTML");//该方法可用于jQuery的元素对象(div)重复添加至页面中时使用
+11. 操作指定属性(https://www.cnblogs.com/yaomeng/p/5359894.html)，可通过如下的方法获取
+	attr()：操作文档节点的属性
+		$(selector).attr("href", "www.baidu.com");
+		其移除方法为 removeAttr(属性名)；$(selector).removeAttr("disabled");
+	prop()：操作js对象的属性，例如 outerHTML 
+		$(selector).prop("outerHTML");//该方法可用于jQuery的元素对象(div)重复添加至页面中时使用
+	data()：操作一些自定义的data-XXXX属性
+		$(selector).data("key", "rone");//设置 data-key 属性的值为 rone
     
 12. 获取子元素并遍历、获取第几个子元素
     遍历：
