@@ -93,3 +93,9 @@
 
 16. $selector.off(option);移除当前元素的option事件
     $("p").off("click");//移除所有 <p> 元素上的 click 事件
+
+17. 文件导出功能的前端写法：
+    1). <a>：<a href="url">下载文件</a>
+    2). <form>：<form action="url"></form>
+
+
