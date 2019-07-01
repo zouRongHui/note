@@ -21,4 +21,9 @@
     var obj = JSON.parse(txt);
     //console.log(obj.0);会报错
     console.log(obj["0"]);
+
+3. json遍历
+for (var key in json) {
+    var value = json[key];
+}
     
