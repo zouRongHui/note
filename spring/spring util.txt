@@ -1,0 +1,10 @@
+
+1. 任务耗时统计工具
+        org.springframework.util.StopWatch sw = new org.springframework.util.StopWatch("work time.");
+        sw.start("first");
+        Thread.sleep(100);
+        sw.stop();
+        sw.start("second");
+        Thread.sleep(200);
+        sw.stop();
+        System.out.println(sw.prettyPrint());
