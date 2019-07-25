@@ -26,6 +26,8 @@
 	
 5. 写入文件
 	OutputStream outputStream = new FileOutputStream(file);
+	//true：写入的方式为为 追加，false：覆盖
+	//OutputStream outputStream = new FileOutputStream(file, true);
 	//write()方法支持很多参数
 	outputStream.write("");
 	outputStream.flush();
