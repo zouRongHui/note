@@ -1,4 +1,4 @@
-下拉多选
+0.下拉多选
 	<#--
 	1、show-tick  会在你选择的每个选项后面 打一个 对号
 	　　2、属性 multiple 毫无疑问 就是多选的意思
@@ -10,3 +10,6 @@
 			<option value="${groupInfoVo.groupId}">${groupInfoVo.groupName}</option>
 		</#list>
 	</select>	
+	
+1. 汉化，引用下面的js文件
+<script src="selectpicker-zh_CN.js"></script>
