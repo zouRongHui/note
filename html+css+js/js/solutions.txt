@@ -53,3 +53,11 @@
 	单个替换："yyyy-MM-dd-hh-mm-ss".replace("-","/")	=>	"yyyy/MM-dd-hh-mm-ss"
 	全部替换："yyyy-MM-dd-hh-mm-ss".replace(/-/g,"/")	=>	"yyyy/MM/dd/hh/mm/ss"
 	
+8. 阻止form的submit
+	preventDefault();
+	
+9. 在if()的条件中，例如0、null、空字符串......会视为false，其他1、2、字符串...视为true
+
+10. if(rone == undefined) 该语句会报错的
+	判断某个变量是否被声明了，可使用if(typeof rone === 'undefined')
+	
