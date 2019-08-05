@@ -51,3 +51,9 @@
 	pre-wrap ：连续的空白符会被保留。在遇到换行符或者<br>元素，或者需要为了填充line盒子时才会换行。
 	pre-line ：连续的空白符会被合并。在遇到换行符或者<br>元素，或者需要为了填充line盒子时会换行。
 	reference ：https://developer.mozilla.org/zh-CN/docs/Web/CSS/white-space
+	
+9. !important 标识强制最高级别的样式，若后面想要覆盖也需要加上。该配置试用所有样式
+	eg.
+	.test {width: 100px!important}
+	<input type='text' class='test' style='width: 150px;'> //该元素的width: 150px;样式是不起作用的
+	<input type='text' class='test' style='width: 150px;!important'> //加上了!important，会重新按照预定的级别来展现最终样式
