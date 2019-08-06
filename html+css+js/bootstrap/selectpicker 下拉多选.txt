@@ -13,3 +13,5 @@
 	
 1. 汉化，引用下面的js文件
 <script src="selectpicker-zh_CN.js"></script>
+2. 初始化之后，变更了选项后，由于bootstrap在原有的selector上加了一层需要刷新加载一下
+	选项的变更同普通的select标签，$("").selectpicker('refresh');
