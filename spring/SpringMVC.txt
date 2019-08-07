@@ -216,17 +216,39 @@
 	}
 	
 3.solutions
-1). springmvc接收date类型参数
-    ①.在需要由string转Date的字段上加上DateTimeFormat注解，代码如下：
-        @DateTimeFormat(pattern="yyyy-MM-dd")
-        private Date actionDate;
-    ②.在控制器中加入如下代码：
-        @InitBinder
-        public void initBinder(ServletRequestDataBinder bin){
-                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                 CustomDateEditor cust = new CustomDateEditor(dsf,true);
-                 bin.registerCustomEditor(Date.class,cust);
-        }
+1). 日期格式数据的处理
+	①. springmvc接收date类型参数
+		在需要由string转Date的字段上加上org.springframework.format.annotation.DateTimeFormat注解,pattern参数为日期数据格式。
+			@DateTimeFormat(pattern="yyyy-MM-dd")
+			private Date actionDate;
+	②. 返回日期数据时，若是以json格式返回的
+		I. 在日期属性上添加com.fasterxml.jackson.annotation.JsonFormat注解，pattern为返回的日期格式，timezone为时区。
+			@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+			private Date date2;
+		II.使用自定义的json转换解析规则，这个方法不仅适用于日期数据，也适用于其他需要手动转换的数据。
+			在日期属性上添加com.fasterxml.jackson.databind.annotation.JsonSerialize注解，using为使用怎样的json转换规则
+			@JsonSerialize(using = DateJsonSerializer.class)
+			private Date date;
+			
+			import com.fasterxml.jackson.core.JsonGenerator;
+			import com.fasterxml.jackson.databind.JsonSerializer;
+			import com.fasterxml.jackson.databind.SerializerProvider;
+			import java.io.IOException;
+			import java.text.SimpleDateFormat;
+			import java.util.Date;
+			/**
+			 * Created by zouRongHui on 2018/6/7.
+			 * Json格式下的Date格式转换
+			 */
+			public class DateJsonSerializer extends JsonSerializer<Date> {
+
+				@Override
+				public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+						throws IOException {
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+					jsonGenerator.writeString(simpleDateFormat.format(date));
+				}
+			}
 	
 	
 	
