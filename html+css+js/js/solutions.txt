@@ -61,3 +61,6 @@
 10. if(rone == undefined) 该语句会报错的
 	判断某个变量是否被声明了，可使用if(typeof rone === 'undefined')
 	
+11. 数值千分位分隔，使用Number 对象的toLocaleString()方法实现
+	Number("123456789.345").toLocaleString();
+	
