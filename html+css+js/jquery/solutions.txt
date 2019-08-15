@@ -98,4 +98,8 @@
     1). <a>：<a href="url">下载文件</a>
     2). <form>：<form action="url"></form>
 
+18. 给元素绑定事件
+	$(document).on('click', function (e) {
+		consol.log('jquery事件绑定')
+	});
 
