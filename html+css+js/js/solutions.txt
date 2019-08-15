@@ -64,3 +64,6 @@
 11. 数值千分位分隔，使用Number 对象的toLocaleString()方法实现
 	Number("123456789.345").toLocaleString();
 	
+12. closest() 方法获得匹配选择器的第一个祖先元素(包括自己)。
+
+	
