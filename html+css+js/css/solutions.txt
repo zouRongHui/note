@@ -57,3 +57,6 @@
 	.test {width: 100px!important}
 	<input type='text' class='test' style='width: 150px;'> //该元素的width: 150px;样式是不起作用的
 	<input type='text' class='test' style='width: 150px;!important'> //加上了!important，会重新按照预定的级别来展现最终样式
+	
+10. 百分比和绝对值组合配置宽度
+	width: calc(100% - 50px);
