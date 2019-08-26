@@ -52,7 +52,9 @@
 		tail -n 20 filename		说明：显示filename最后20行。
 		tail -r -n 10 filename	说明：逆序显示filename最后10行。
     
-
+11. 查看端口使用情况
+    lsof -i:端口号
+    netstat -tunlp|grep 端口号
 
 
 
