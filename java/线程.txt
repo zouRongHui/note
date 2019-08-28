@@ -9,16 +9,22 @@
 	2）：可以避免java中的单继承的限制
 	3）：增加程序的健壮性，代码可以被多个线程共享，代码和数据独立
 	4）：线程池只能放入实现Runable或callable类线程，不能直接放入继承Thread的类
+	
 4.常用API
-	sleep(): 强迫一个线程睡眠Ｎ毫秒。
+	static sleep(): 强迫一个线程睡眠Ｎ毫秒。
 	join(): 等待线程终止。 在A线程中调用了B线程的join()方法，A一定在B死后才销毁。
-	yield(): 暂停当前正在执行的线程对象，让出CPU资源。将线程从运行状态转到可运行状态，接下来可能还是继续运行该线程。
+	static yield(): 暂停当前正在执行的线程对象，让出CPU资源。将线程从运行状态转到可运行状态，接下来可能还是继续运行该线程。
 	setPriority(): 更改线程的优先级。供10级，建议使用如下的层级MIN_PRIORITY = 1、NORM_PRIORITY = 5、MAX_PRIORITY = 10。
-	wait(): 强迫一个线程等待。wait()会释放所拥有的对象锁。
-	notify(): 通知一个线程继续运行。
+	Object.wait(): 强迫一个线程等待。wait()会释放所拥有的对象锁。
+	Object.notify(): 通知一个线程继续运行。
 		Obj.wait(),Obj.notify必须在synchronized(Obj){...}语句块内。
-	currentThread(): 得到当前线程。
+	static currentThread(): 得到当前线程。
 	setDaemon(): 设置一个线程为守护线程。
+	static activeCount(): 获取当前线程所在线程组中活跃的线程数，一旦线程start后，即为活跃状态，直到手动终止或自然死亡。
+	interrupt(): 设置线程中断，详见7。
+	isInterrupted();判断线程是否中断。
+	static interrupted():判断是否中断，并清除当前中断状态。
+	
 5.守护线程
 	在Java中有两类线程：User Thread(用户线程)、Daemon Thread(守护线程)
 	Daemon的作用是为其他线程的运行提供服务。
@@ -32,3 +38,14 @@
 	2）、在Daemon线程中产生的新线程也是Daemon的。
 	3）、不是所有的应用都可以分配给Daemon线程来进行服务，比如读写操作或者计算逻辑。
 		因为在Daemon Thread还没来的及进行操作时，虚拟机可能已经退出了。
+6. 坑
+    1). 线程start后，自然死亡之后，无法重新启动，需要重新实例对象
+	
+7. 线程中断	https://www.lmlphp.com/user/2289/article/item/22552/
+	中断机制：不会使目标线程立即退出(但此时相关的线程的API可能会报错 java.lang.InterruptedException)，
+		而是给线程发送一个通知，告知目标线程有人希望你退出。至于目标线程接收到通知后如何处理，则完全由目标线程自行决定。
+		在run方法中可通过可以isInterrupted()判断出当前线程的中断情况，后续的处理可通过抛出异常退出、return退出，或者无视。
+	相关method
+		interrupt(): 设置线程中断
+		isInterrupted();判断线程是否中断
+		static interrupted():判断是否中断，并清除当前中断状态
