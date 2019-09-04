@@ -1,0 +1,15 @@
+
+1. double类型数据过大时会自动转换成指数形式
+    double d;
+    d = 1234567890.002;
+    System.out.println(d);  // 1.234567890002E9
+    d = 123456789.002;
+    System.out.println(d);  // 1.23456789002E8
+    d = 12345678.002;
+    System.out.println(d);  // 1.2345678002E7
+    d = 1234567.002;
+    System.out.println(d);  // 1234567.002
+    d = 1234567.123456789;
+    System.out.println(d);  // 1234567.123456789
+    d = 123456.002;
+    System.out.println(d);  // 123456.002
