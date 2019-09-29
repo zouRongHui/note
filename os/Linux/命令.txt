@@ -56,7 +56,9 @@
     lsof -i:端口号
     netstat -tunlp|grep 端口号
 
-
+12. 重命名文件、移动文件
+	重命名：mv readme.txt readme.doc
+	移动：mv readme.txt ~/readme.doc
 
 
 
