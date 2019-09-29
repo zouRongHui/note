@@ -66,6 +66,7 @@
 		$(selector).prop("outerHTML");//该方法可用于jQuery的元素对象(div)重复添加至页面中时使用
 	data()：操作一些自定义的data-XXXX属性
 		$(selector).data("key", "rone");//设置 data-key 属性的值为 rone
+	removeAttr(): 移除属性
     
 12. 获取子元素并遍历、获取第几个子元素
     遍历：
