@@ -192,3 +192,6 @@ public class ExcelMain {
         return cellStyle;
     }
 }
+
+2. 坑
+	1). CellStyle 单个excel有最大实例数的限制(好像是400)
