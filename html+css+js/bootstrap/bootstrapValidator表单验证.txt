@@ -276,3 +276,8 @@ JS:
             }
         }
     });
+	
+2. tips
+	1). 手动重新认证
+        $("表单").data('bootstrapValidator').revalidateField("属性名");
+        $("#form-add").data('bootstrapValidator').revalidateField("runCycle");
