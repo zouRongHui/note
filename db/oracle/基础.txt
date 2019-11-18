@@ -1,2 +1,12 @@
 
 1. 在Oracle Database中，VARCHAR2字段类型，最大值为4000，SQL参考手册中也明确指出VARCHAR2的最大大小为4000
+
+2. 递归查询，product_level_id:当前节点id，parent_level_id:父节点的id
+	向下递归，从根开始：
+		select * from cbpms_product_tree t start with t.product_level_id = 'CZ00300' connect by prior t.product_level_id = t.parent_level_id;
+	向上递归，从某个叶子开始：
+		select * from cbpms_product_tree t start with t.product_level_id = 'CZ00357' connect by prior t.parent_level_id = t.product_level_id;
+		
+3. 建立索引
+	create index 索引名 on 表名(列名);
+	create index cbpms_dept_manager_relate_department_id_index on cbpms_dept_manager_relate (department_id);
