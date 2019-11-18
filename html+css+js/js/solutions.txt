@@ -17,7 +17,7 @@
     数值对象.toFixed(num)
 
 4. 判断是否为空
-    str == '' || str == undefined || str == null
+    str == '' || typeof str === 'undefined' || str == null
 
 5. 创建数组
     eg.
@@ -72,4 +72,9 @@
 	document.addEventListener('click',function (e) {
 		consol.log('原生事件绑定')
 	});
-	
+
+15. in遍历数组
+    var array = ['','',''];
+	for (i in array) {
+	    console.log(i);//0,1,2
+	}
