@@ -4,7 +4,7 @@
 
 1. 获取select选中的值和文本
     $("#id option:selected").val();
-    $("#id option:selected").text();
+    $("#id option:selected").text();$("#id").find("option:selected").text();
     
 2. 获取第一个子元素
     $("#id").children("标签:first-child");
