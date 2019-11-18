@@ -114,6 +114,8 @@ class：
 		update方法及batchUpdate方法：update方法用于执行新增、修改、删除等语句；batchUpdate方法用于执行批处理相关语句；
 		query方法及queryForXXX方法：用于执行查询相关语句；
 		call方法：用于执行存储过程、函数相关语句。
+	2).批操作，batchUpdate()方法，insert语句需要写全所有列
+		insert into cbpms.group_info_customer_detail(id,name,age) values(?,?,?)
 
 
 
