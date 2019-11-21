@@ -74,7 +74,7 @@
             <groupId>redis.clients</groupId>
             <!--构件的标识符-->
             <artifactId>jedis</artifactId>
-            <!--可选项：版本，该属性缺失时会使用仓库中最新的版本-->
+            <!--可选项：版本，该属性缺失时会使用仓库中最新的版本。实测效果为不指定时本地库里面会生成一个unknown的目录-->
             <version>2.9.0</version>
 			<!--可选项：依赖范围。有六个可选值：（https://blog.csdn.net/seasonsbin/article/details/79093647）
 				compile（编译范围）（默认依赖范围）对于编译、测试、运行三种classpath都可用，例如项目中有spring-core的依赖，那么spring-core不管是在编译，测试，还是运行都会被用到，因此spring-core必须是编译范围。
