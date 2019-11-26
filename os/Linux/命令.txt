@@ -1,42 +1,70 @@
+1.查询Linux内核和发行版信息
+	uname -(a 所有,s 内核,n 完整主机名,r 内核版本,v 内核发行日期,m 机器硬件类型,p 处理器类型,i 硬件平台类型,o 操作系统)
+	
+2.用户
+	新建: useradd -username
+		新建admin用户: useradd admin
+	设置密码: passwd -username
+		设置admin密码: passwd admin
+	删除: userdel -username
+		删除admin用户: userdel admin
+	用户列表文件：/etc/passwd
+		一行记录对应着一个用户，每行记录又被冒号(:)分隔为7个字段，其格式如下：
+			用户名:口令:用户标识号:组标识号:注释性描述(用户名):主目录:登录Shell
+	用户组列表文件：/etc/group
+	查看系统中有哪些用户：cut -d : -f 1 /etc/passwd
+	查看可以登录系统的用户：cat /etc/passwd | grep -v /sbin/nologin | cut -d : -f 1
+	查看用户操作：w命令(需要root权限)
+	查看某一用户：w 用户名
+	查看登录用户：who
+	查看用户登录历史记录：last
 
-1. 远程登陆
-    ssh 用户名@xxx.xxx.xxx.xxx
+3.文件\文件夹的新建、删除、移动、复制等
+	新建文件夹
+		mkdir 文件夹名
+	新建文件
+		touch 文件名
+	删除文件夹
+		rmdir 文件夹名(tips：只能删除空的文件夹)
+	删除文件
+		rm [选项] 文件名
+			-d: 删除空白文件夹。
+			-f: 强制删除文件或文件夹。
+			-i: 删除已有文件或文件夹之前先询问用户。
+			-r: 递归处理，将指定文件夹下的所有文件和子目录一并处理。
+	复制
+		cp [选项] 源文件或目录 目标文件或目录(tips：若想要重命名并复制，第二参数为一个文件 cp rone.txt ./snow.txt)
+			-r: 递归处理，用来复制文件夹的。
+	重命名、移动
+		mv 旧文件路径 新文件路径
 
-2. 登出
-    logout
-    
-3. 历史记录
-    history |more #显示命令历史记录(加上more后可以一段一段的显示)
+4.ping [option] ipaddress(IP地址、域名、主机名)
+	-c 指定发送的数据包个数
+	-f 快速发送。用于网络执行的极限测试
+	-s 指定数据包大小。用于测试链路质量和响应速度
+	-I 指定发送测试数据包的网络接口
+	-R 显示数据包经过的路由过程
+	-t 指定数据包的TTL值(TTL用于控制数据包的生命周期)
+		
+5.查询已安装的软件包	rpm -q
+	rpm -q Name   查找指定的软件包
+	rpm -qa       查找所有
+	rpm -qi       显示软件包的信息
+	rpm -ql       显示软件包的文件列表
+	rpm -qs       显示包中文件的状态
+	rpm -qd       显示被标注为文档的文件列表
+	
+6.查看端口使用情况
+    netstat -tunlp|grep 端口号
+	根据pid干掉进程：kill -9 进程号	
+
+7.历史记录
+    history
 	history -c #删除，需要在重启后生效
-	history -w #立即生效
+	history -w #删除立即生效
 	#设置系统默认的储存数  /etc/profile  HISTSIZE=XX
 
-4. 新建文件
-    touch fileName
-
-5. 本机复制
-    cp [选项] 源文件或目录 目标文件或目录 
-     选项
-       - r 若给出的源文件是一目录文件，此时cp将递归复制该目录下所有的子目录和文件。
-        此时目标文件必须为一个目录名。
-        
-6. 重命名、移动文件/文件夹
-    mv 源文件名.txt 新文件名.txt
-    mv 文件名.txt file/
-    
-7. 删除文件/文件夹
-    rmdir 文件夹名(只能删除空的文件夹)
-    rm -rf 文件夹名(删除该文件夹下的所有文件和子文件夹)
-      -f: 强制删除文件或文件夹；
-      -i: 删除已有文件或文件夹之前先询问用户；
-      -r: 递归处理，将指定文件夹下的所有文件和子目录一并处理；
-
-8. 加密复制，一般用于远程文件传输
-    scp [参数] 原路径 目标路径
-      -r 递归复制整个目录
-    eg: scp test.war root@xxx.xxx.xxx.xxx:/home/user
-	
-10. tail命令语法	https://www.cnblogs.com/mfryf/p/3336804.html
+8.tail命令语法	https://www.cnblogs.com/mfryf/p/3336804.html
 	tail [ -f ] [ -c Number | -n Number | -m Number | -b Number | -k Number ] [ File ]
 	参数解释：
 	-f 该参数用于监视File文件增长。
@@ -51,14 +79,22 @@
 		tail -f filename		说明：监视filename文件的尾部内容（默认10行，相当于增加参数 -n 10），刷新显示在屏幕上。退出，按下CTRL+C。
 		tail -n 20 filename		说明：显示filename最后20行。
 		tail -r -n 10 filename	说明：逆序显示filename最后10行。
-    
-11. 查看端口使用情况
-    lsof -i:端口号
-    netstat -tunlp|grep 端口号
 
-12. 重命名文件、移动文件
-	重命名：mv readme.txt readme.doc
-	移动：mv readme.txt ~/readme.doc
+9.less 查看
+	参数：
+		-N 显示行号
+	进入后：
+		回车  向下移动一行
+		y     向上移动一行
+		空格  向下滚动一屏
+		b     向上滚动一屏
+		d     向下滚动半屏
+		u     向上滚动半屏
+		g     第一行
+		G     最后一行
+		v     打开vi编辑器
+		q     退出
+
 
 
 
