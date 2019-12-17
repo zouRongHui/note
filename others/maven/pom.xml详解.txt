@@ -66,6 +66,19 @@
         </profile>
     </profiles>
 
+    <!--
+        当有其他多个项目依赖该项目时，<dependencyManagement>可用于帮助统一各个jar包的版本。
+        不同于<dependencies>，<dependencyManagement>只是声明只在子项目依赖相同的jar包且没有指定版本号时起作用，而父项目的<dependencies>会强制所有子项目依赖所有jar包。
+     -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId></groupId>
+                <artifactId></artifactId>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <!--该项目的所有依赖,引入jar包-->
     <dependencies>
         <!--单个依赖-->
