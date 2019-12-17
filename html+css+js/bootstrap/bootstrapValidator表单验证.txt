@@ -277,7 +277,17 @@ JS:
         }
     });
 	
-2. tips
-	1). 手动重新认证
-        $("表单").data('bootstrapValidator').revalidateField("属性名");
-        $("#form-add").data('bootstrapValidator').revalidateField("runCycle");
+2. api	http://bootstrapvalidator.votintsev.ru/api/
+	语法
+		①.$(form).data('bootstrapValidator').methodName(parameters);
+		②.$(form).bootstrapValidator(methodName, parameters);
+		eg.
+			$(form).data('bootstrapValidator').updateStatus('birthday', 'NOT_VALIDATED');
+			$(form).bootstrapValidator('updateStatus', 'birthday', 'NOT_VALIDATED');
+			$(form).data('bootstrapValidator').validateField('birthday');
+			$(form).bootstrapValidator('validateField', 'birthday');
+	API
+		revalidateField(field)	重新验证。当属性值被其他组件修改后可通过该方法重新验证。
+			$(form).data('bootstrapValidator').revalidateField("name");
+		resetForm()	重置。清除所有验证结果和提示信息，所有字段都将标记为未验证。
+			$(form).data('bootstrapValidator').resetForm();
