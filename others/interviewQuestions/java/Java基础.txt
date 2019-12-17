@@ -41,4 +41,9 @@
     ClassNotFoundException
     NullPointerException
     ClassCastException
+	
+9. boolean类型占用多少字节？
+	一般情况下：boolean在数组情况下为1个字节，单个boolean为4个字节(虚拟机规范中说了，boolean值在编译之后都使用Java虚拟机中的int数据类型来代替)。
+	按照虚拟机规范来设计的虚拟机上，是上述的情况，非规范的就不好说了。
+	
     
