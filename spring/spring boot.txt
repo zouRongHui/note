@@ -5,4 +5,6 @@
 
 3. web应用无需像传统的spring项目配置web.xml和application-context.xml
 
-4. 
+4. 默认配置文件的路径
+    private static final String DEFAULT_SEARCH_LOCATIONS = "classpath:/,classpath:/config/,file:./,file:./config/";
+    还支持不同的环境配置，额外去加载各个环境的配置文件application-dev/prod...
