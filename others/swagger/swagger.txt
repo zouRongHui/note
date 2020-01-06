@@ -1,5 +1,5 @@
 
-1. 一个API文档生成工具，可结合spring自动生成API文档
+1. 一个API文档生成工具，可结合spring自动生成API文档(查看路径一般为 http://localhost:8111/swagger-ui.html)
 
 @Api系列注解
 	@Api: 用在类上，说明该类的作用。可以标记一个Controller类做为swagger 文档资源
