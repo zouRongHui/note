@@ -25,7 +25,7 @@
     Cache 缓存  n                //是否将序列缓存在内存中，n 代表缓存的序列个数       
     //Cache<maxvalue-minvalue/increment by  代表缓存所有序列值
     //创建一个序列，要求开始为1001，每次增长1，最大值为99999，最小值为1001，不缓存，不循环。
-    eg：create sequence emp_eid_seq increment 1 start with 1001 maxvalue 99999 minvalue 1001 nocycle nochache 
+    eg：create sequence emp_eid_seq increment by 1 start with 1001 maxvalue 99999 minvalue 1001 nocycle nochache
 
 
 4.使用序列
