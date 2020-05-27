@@ -1,78 +1,178 @@
-好代码读起来应该像一个故事，而不是像一个字谜
+好代码读起来应该像一个故事，而不是像一个字谜                                                         
+################################################                                      
+DOING：
+httpClient    
 ################################################
 TODO：
-spring namedparameterjdbctemplate 使用delete not in 时具名占位符bug
-hibernate hql 的delete语句的 not in 使用
-hibernate 联合主键以及联合组建下的自关联操作
-
-activit流程管理组件
-dubbo
+idea 远程调试
+自动部署脚本
+基于swagger2和bootstrap的一个接口文档
+	https://gitee.com/xiaoym/knife4j
+分库分表利器——sharding-sphere
+Geohash算法原理及实现
+	https://www.jianshu.com/p/2fd0cf12e5ba
+web监控工具
+druid
+	https://zhuanlan.zhihu.com/p/34964943
+锁，重入锁、死锁
+分布式锁，原理，java语言的实现方式(数据库、redis、zookeeper)
+	https://zhuanlan.zhihu.com/p/72896771
+	https://zhuanlan.zhihu.com/p/51042458
+开发安全
+RSA非对称的加密算法
+	https://www.cnblogs.com/gaomanito/p/9569857.html
+socket工具
+nginx
+get请求无法使用body传参
+Linux上空白js文件，访问404
+ajax使用json格式请求
+spring接受json格式的请求数据
+ajax请求无法使用自定义的cookie
+javaweb 根据sessionid获取session
+json格式的请求，如何在filter中拦截获取参数，且不影响之后的请求操作。
+	https://blog.csdn.net/xing930408/article/details/89710200
+服务器增加代理后获取原始的客户ip
+oracle 取单值，去部分值
+restTemplate https://www.cnblogs.com/f-anything/p/10084215.html
+request、response常用方法
+filter，springboot集成filter有两种方式注解、配置类
+Interceptor(拦截器)
+spring-secret
+swagger2 根据智享微店小程序项目重新整理
+java方法重载，两个方法单一参数，方法1参数类型为String，方法2参数为泛型，当泛型也为String时，调用该方法名时目前发现调用的实际是方法1，该咋整才能调用方法2
+hikari sb2推荐数据连接池
+*jwt认证
+*fap4的代码自动生成工具
+el、jstl
+jQuery的zTree	http://www.treejs.cn/v3/api.php
+sftp、ftp
+GC
+maven中针对不同环境的配置
+	solution1：根据不同的配置指定不同的资源路径
+		https://blog.csdn.net/qq_31289187/article/details/85116371                    
+	solution2：跟距不同的配置用不同的配置文件去动态加载主资源文件的配置               
+		https://blog.csdn.net/a303549861/article/details/82766491                     
+	tip: spring.profiles.active=@profileActive@ 用文件去覆盖之前的配置                
+js 的RegExp对象                                                                       
+装饰器模式                                                                            
+PowerDesigner                                                                         
+                                                                                      
+hibernate 查询结果映射到一个非表实体类                                                
+spring namedparameterjdbctemplate 使用delete not in 时具名占位符bug                   
+hibernate hql 的delete语句的 not in 使用                                              
+hibernate 联合主键以及联合组建下的自关联操作                                          
+                                                                                      
+activit流程管理组件                                                                   
+dubbo                                                                                 
 freemarker
-Velocity
+	默认会对数值类型数据做千分分割
+Velocity                                                                              
+                                                                                      
+java                                                                                  
+	List、Map、Set的所有实现类的原理和源码                                            
+	并发包java.concurrent	外修互斥，内修可见                                        
+	IO包和NIO包                                                                       
+	JVM：GC、类加载机制、内存                                                         
+                                                                                      
+springCloud                                                                           
+springboot                                                                            
+mybatis                                                                               
+                                                                                      
+python                                                                                
+                                                                                      
+maven                                                                                 
+redis                                                                                 
+rabbitmq                                                                              
+solr、Lucene                                                                          
+                                                                                      
+Jenkins 自动部署发布工具                                                              
+supervisor	进程管理工具                                                              
+shell                                                                                 
+                                                                                      
+计算机系统原理；                                                                      
+网络通信协议（TCP/IP，HTTP等）；                                                      
+数据结构与算法；   
 
-java
-	List、Map、Set的所有实现类的原理和源码
-	并发包java.concurrent
-	IO包和NIO包
-	JVM：GC、类加载机制、内存
+spring blade	https://gitee.com/smallc/SpringBlade                                                                                     
+                                                                                      
+                                                                                      
+################################################                                      
+DONE：                                                                                
+#logback                                                                              
+#下载文件中文乱码，各个浏览器适配                                                     
+#正则表达式                                                                           
+#js 中 json遍历
+#生成二维码 https://blog.csdn.net/magi1201/article/details/87938541
 
-springCloud
-springboot
-mybatis
-lombok 通过简单的注解的形式来帮助我们简化消除一些必须有但显得很臃肿的 Java 代码的工具
+################################################   
+阿里云Linux：114.55.26.204
+		账号：root
+		密码：!@#$1234qwer
 
-python
-
-maven
-redis
-rabbitmq
-solr、Lucene
-
-Jenkins 自动部署发布工具
-supervisor	进程管理工具
-shell
-
-计算机系统原理；
-网络通信协议（TCP/IP，HTTP等）；
-数据结构与算法；
-
-################################################
-DOING：
-
-
-################################################
-DONE：
-#logback
-
-
-
-
-################################################
-爬山线路：
-http://blog.sina.com.cn/s/blog_66fc4f220102x1uj.html
-################################################
-book：
-Java编程思想
-大话设计模式
-重构 改善既有代码的设计
-effective java
-深入理解Java虚拟机
-Java并发编程实战
-################################################
-帐号：
-GitHub: zouRongHui 二级
+   
+################################################                                      
+爬山线路：                                                                            
+http://blog.sina.com.cn/s/blog_66fc4f220102x1uj.html                                  
+################################################                                      
+book：                                                                                
+Java编程思想                                                                          
+大话设计模式                                                                          
+重构 改善既有代码的设计                                                               
+effective java                                                                        
+深入理解Java虚拟机                                                                    
+Java并发编程实战                                                                      
+################################################                                      
+帐号：                                                                                
+GitHub: zouRongHui 二级                                                               
 google: zrh870136444@gmail.com
-################################################
-攒机:
-CPU：i5 7500(1399)、i5 7600K(1729)
-主板：
-显卡：
-内存：
-硬盘：
-散热器：
-电源：
-机箱：
-显示屏：
-################################################
-压轴网站:
-http://ncase.me/door/#gns!%60mv%60xr
+阿里云：邮箱，标准密码                                        
+################################################                                      
+压轴网站:                                                                             
+http://ncase.me/door/#gns!%60mv%60xr      
+#####
+	ONE一个		
+菜谱查询
+健康小提示
+生活小窍门
+
+	
+
+	
+足球新闻	
+汉服新闻	
+影视资讯
+	
+人脸识别
+中药大全
+
+
+
+星座运势
+雷人笑话
+微信精选
+
+
+
+
+https://v1.hitokoto.cn/	GET/POST	
+	1、已启用 HSTS， 并已加入 HSTS Preload List 计划
+	2、站点QPS限制：10，超过有可能会被屏蔽
+	3、线路：大陆+海外
+	
+	
+	
+	
+	
+
+aquarius 水瓶座（1月21日～2月19日）
+pisces 双鱼座（2月20日～3月20日）	
+aries 白羊座（3月21日～4月20日）
+taurus 金牛座（4月21～5月21日）
+gemini 双子座（5月22日～6月21日）
+cancer 巨蟹座（6月22日～7月22日）
+leo 狮子座（7月23日～8月23日）
+virgo 处女座（8月24日～9月23日）
+libra 天秤座（9月24日～10月23日）
+scorpio 天蝎座（10月24日～11月22日）
+sagittarius 射手座（11月23日～12月21日）
+capricorn 摩羯座（12月22日～1月20日）                                            

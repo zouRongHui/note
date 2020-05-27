@@ -1,0 +1,10 @@
+
+1. substr(string,start,length) 截取数据库某个字段中的一部分。与java不同，这里是从索引从1起始
+	substr('123456',3,2);  结果是	34
+	substr('123456',-3,2);  结果是	45
+	substr('123456',0,2);  特殊，与下同
+	substr('123456',1,2);  结果同为	12
+	数据库差异，仅仅是名字不同
+		MySQL	substr()或substring()
+		Oracle	substr()
+		SQL Server	substring()

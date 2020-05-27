@@ -1,3 +1,4 @@
+0.https://www.jianshu.com/p/c79f6a14f6c9
 
 1. 一个API文档生成工具，可结合spring自动生成API文档(查看路径一般为 http://localhost:8111/swagger-ui.html)
 
@@ -23,3 +24,16 @@
 		value, 字段的一些说明
 		required, 是否必须
 		hidden, 是否隐藏，默认false
+
+2.坑
+    1).swagger-ui.html 页面上try it now出错提示not fetch，而且给出的Request URL，域名不对。
+        reason：大概率是服务器的配置跨域导致的。
+        solution：
+            ①.nginx做代理内网域名时，增加反向代理-做跨域支持。（未测试）
+                location /apis {
+                    rewrite? ^.+apis/?(.*)$ /$1 break;
+                    include? uwsgi_params;
+                    ? ?proxy_pass?? http://server:port;
+                }
+            ②.配置文件中增加swagger访问域名。实测有效
+                springfox.documentation.swagger.v2.host = xxx.xxx.com(.cn)

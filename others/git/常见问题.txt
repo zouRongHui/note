@@ -1,0 +1,4 @@
+
+1. 远程提交被拒，可能原因
+	1). 提示	missing Change-Id in commit message footer
+		解决方案：git log 查看具体是哪个commit丢失了change-Id，在择机处理

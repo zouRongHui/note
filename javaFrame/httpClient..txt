@@ -1,0 +1,5 @@
+https://blog.csdn.net/justry_deng/article/details/81042379
+https://blog.csdn.net/w372426096/article/details/82713315
+
+
+Http持久连接与HttpClient连接池源码分析：https://www.cnblogs.com/kingszelda/p/8988505.html
